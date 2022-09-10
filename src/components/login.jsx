@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -27,32 +27,24 @@ function Login(){
     });
   };
 
-  const checkUser = () => {
-    const userCheck = users.find(user =>
-      (user.username === data.username && user.password === data.password));
-    if (userCheck){
-      navigate("/secrets");
-    }else {
-      navigate("/login");
-    }
-    // console.log(data.username);
-
-  };
-  useEffect(() => {
-    checkUser(users)
-  }, [data.username, data.password])
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsShown(true);
 
+    const userCheck = users.find(user =>
+      (user.username === data.username && user.password === data.password));
+    if (userCheck){
+      setIsShown(true);
+    }else {
+      setIsShown(false);
+    }
   }
 
 
 
   return (
-    <form className="container mt-5 home">
+    <div className="container mt-5 home">
     <h1>Login</h1>
 
     <div className="row">
@@ -61,7 +53,7 @@ function Login(){
           <div className="card-body">
 
 
-
+            <form onClick={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
 
@@ -87,14 +79,14 @@ function Login(){
                 onChange={changeHandler}/>
 
               </div>
-              <button type="submit" onClick={handleSubmit} className="btn btn-dark">Login</button>
-
-
+              <button type="submit"  className="btn btn-dark">Login</button>
+              {isShown && navigate("/secrets")}
+              </form>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
     )
 }
 
