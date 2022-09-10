@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Submit(){
   return (
@@ -13,7 +14,7 @@ function Submit(){
           <div className="form-group">
             <input type="text" className="form-control text-center" name="secret" placeholder="What's your secret?" />
           </div>
-          <button type="submit" className="btn btn-dark">Submit</button>
+          <Link className="btn btn-dark" type="submit" to="/secrets">Submit</Link>
         </form>
       </div>
     </div>
