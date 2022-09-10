@@ -14,6 +14,7 @@ ReactDOM.render(
       <Route index path="/" element={ <App /> }/>
       <Route path="/login" element={ <Login /> }/>
       <Route path="/register" element={ <Register /> } />
+      <Route path="/secrets" element={ <Secrets /> } />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>, document.getElementById("root"));
