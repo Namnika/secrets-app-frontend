@@ -6,7 +6,11 @@ import Register from "./register";
 
 
 
-const App = () => {
+function App(){
+
+
+
+
   return (
       <div className="app">
         <Routes>

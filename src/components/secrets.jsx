@@ -1,6 +1,6 @@
 import React from "react";
 
-function Submit(){
+function Secrets(){
   return (
     <div class="container">
       <div class="jumbotron centered">
@@ -20,4 +20,4 @@ function Submit(){
   )
 }
 
-export default Submit;
+export default Secrets;
