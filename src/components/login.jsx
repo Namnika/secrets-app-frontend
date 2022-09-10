@@ -80,7 +80,7 @@ function Login(){
 
               </div>
               <button type="submit"  className="btn btn-dark">Login</button>
-              {isShown && navigate("/secrets")}
+              {isShown && navigate("/submit")}
               </form>
           </div>
         </div>

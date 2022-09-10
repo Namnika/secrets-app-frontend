@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import App from "./components/App";
 import Login from "./components/login";
 import Register from "./components/register";
-import Secrets from "./components/secrets";
+import Submit from "./components/submit";
 
 
 ReactDOM.render(
@@ -14,7 +14,7 @@ ReactDOM.render(
       <Route index path="*" element={ <App /> }/>
       <Route path="/login" element={ <Login /> }/>
       <Route path="/register" element={ <Register /> } />
-      <Route path="/secrets" element={ <Secrets /> } />
+      <Route path="/submit" element={ <Submit /> } />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>, document.getElementById("root"));
