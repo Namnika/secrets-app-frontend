@@ -4,6 +4,7 @@ import Login from "./login";
 import Home from './home';
 import Register from "./register";
 import Submit from "./submit";
+import Secrets from "./secrets";
 
 
 
@@ -16,6 +17,7 @@ function App(){
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="submit" element={<Submit />} />
+          <Route path="secrets" element={<Secrets />} />
         </Routes>
       </div>
   );

@@ -5,6 +5,7 @@ import App from "./components/App";
 import Login from "./components/login";
 import Register from "./components/register";
 import Submit from "./components/submit";
+import Secrets from "./components/secrets";
 
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route path="/login" element={ <Login /> }/>
       <Route path="/register" element={ <Register /> } />
       <Route path="/submit" element={ <Submit /> } />
+      <Route path="/secrets" element={ <Secrets /> } />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>, document.getElementById("root"));
