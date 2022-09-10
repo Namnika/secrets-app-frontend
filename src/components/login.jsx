@@ -15,7 +15,7 @@ function Login(){
   ]
 
   const navigate = useNavigate();
-
+  const [isShown, setIsShown] = useState(false);
   const [data, setData] = useState({
     username: "",
     password: ""
@@ -31,9 +31,9 @@ function Login(){
     const userCheck = users.find(user =>
       (user.username === data.username && user.password === data.password));
     if (userCheck){
-      navigate("/secrets")
+      navigate("/secrets");
     }else {
-      console.log("Wrong password or username");
+      navigate("/login");
     }
     // console.log(data.username);
 
@@ -43,64 +43,58 @@ function Login(){
   }, [data.username, data.password])
 
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userCheck = users.find(user =>
-      (user.username === data.username && user.password === data.password));
-    if (userCheck){
-      navigate("/secrets");
-    }else {
-      console.log("Wrong password or username");
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsShown(true);
 
   }
 
 
 
   return (
-    <div class="container mt-5 home">
+    <form className="container mt-5 home">
     <h1>Login</h1>
 
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="card">
-          <div class="card-body">
+    <div className="row">
+      <div className="col-sm-8">
+        <div className="card">
+          <div className="card-body">
 
 
 
-              <div class="form-group">
-                <label for="email">Email</label>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
 
                 <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 name="username" required
                 placeholder="Enter your email"
                 value={data.username}
                 onChange={changeHandler}/>
 
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
 
                 <input
                 type="password"
-                class="form-control"
+                autoComplete="on"
+                className="form-control"
                 name="password" required
                 placeholder="Enter your password"
                 value={data.password}
                 onChange={changeHandler}/>
 
               </div>
-              <button type="submit" onClick={handleSubmit} class="btn btn-dark">Login</button>
+              <button type="submit" onClick={handleSubmit} className="btn btn-dark">Login</button>
 
 
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
     )
 }
 
