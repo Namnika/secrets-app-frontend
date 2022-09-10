@@ -2,24 +2,24 @@ import React from "react";
 
 function Register(){
   return (
-    <div class="container mt-5 home">
+    <div className="container mt-5 home">
       <h1>Register</h1>
 
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="card">
-            <div class="card-body">
+      <div className="row">
+        <div className="col-sm-8">
+          <div className="card">
+            <div className="card-body">
 
               <form action="/register" method="POST">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" name="username" />
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" className="form-control" name="username" />
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" />
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input type="password" className="form-control" name="password" />
                 </div>
-                <button type="submit" class="btn btn-dark">Register</button>
+                <button type="submit" className="btn btn-dark">Register</button>
               </form>
 
             </div>
