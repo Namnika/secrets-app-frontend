@@ -20,4 +20,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 const usersRouter = require("./routes/users");
-app.use("/", usersRouter);
+app.use("/register", usersRouter);
