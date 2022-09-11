@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-
+import {Routes, Route} from 'react-router-dom';
+import Login from "./login";
+import Home from './home';
+import Register from "./register";
+import Submit from "./submit";
+import Secrets from "./secrets";
 import axios from "axios";
-import {Link } from "react-router-dom";
+
+
 
 function App(){
   const [users, setUsers] = useState([]);
@@ -15,26 +21,36 @@ function App(){
   useEffect(() => {
     axios.get("http://localhost:5000/")
     .then(res => {
-      setUsers(res.data);
+        setUsers(res.data);
     })
     .catch(err => {
-      console.log(err);
+        console.log(err);
     });
   });
 
 
   return (
-    <div className="jumbotron centered home">
-      <div className="container">
-        <i className="fas fa-key fa-6x"></i>
-        <h1 className="display-3">Secrets</h1>
-        <p className="lead">Don't keep your secrets, share them anonymously!</p>
-        <hr />
-        <a className="btn btn-light btn-lg" href="/register" role="button">Register</a>
-        <Link role="button" className="btn btn-dark btn-lg" to="/login">Login</Link>
 
+      <div className="app">
+        <Routes>
+          <Route path="*" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={users.map((user) =>
+            {
+              return(
+                <Register
+                key={user._id}
+                _id={user._id}
+                email={user.email}
+                password={user.password}
+                onAdd={addUser} /> )}
+              )
+            } />
+
+          <Route path="submit" element={<Submit />} />
+          <Route path="secrets" element={<Secrets />} />
+        </Routes>
       </div>
-    </div>
   );
 };
 

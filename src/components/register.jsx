@@ -24,6 +24,9 @@ function Register(){
   }
 
 
+
+
+
   function submitUser(event){
     console.log(user);
 
@@ -35,8 +38,8 @@ function Register(){
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     };
 
-    axios.post("http://localhost:5000/", data, headers)
-    .then(res => console.log(res.data));
+    axios.post("http://localhost:5000/register", data, headers)
+    .then(res => console.log(res.data), navigate("/submit"));
 
     setUser({
       email: "",
@@ -47,7 +50,7 @@ function Register(){
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/")
+    axios.get("http://localhost:3000/register")
     .then(res => {
       setUser(res.data);
     })
