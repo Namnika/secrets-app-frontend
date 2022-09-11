@@ -1,16 +1,16 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
-let User = require("../models/user.model.js");
+let User = require("../models/user.model");
 
 
 router.use(bodyParser.urlencoded({extended: true}));
-router.route("/register").get((req, res) => {
+router.route("/").get((req, res) => {
   User.find()
   .then(users = res.json(users))
   .catch(err => res.status(400).json("Error: " + err))
 });
 
-router.route("/register").post((req, res) => {
+router.route("/").post((req, res) => {
   const newUser = new User({
     email: req.body.email,
     password: req.body.password

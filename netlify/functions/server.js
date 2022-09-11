@@ -24,4 +24,4 @@ connection.once("open", () => {
 
 
 const usersRouter = require("./routes/users");
-app.use("/users", usersRouter);
+app.use("/", usersRouter);
