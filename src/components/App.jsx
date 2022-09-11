@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Register from "./register";
-import Login from "./login";
-import Submit from "./submit";
-import Secrets from "./secrets";
+
 import axios from "axios";
 import {Link } from "react-router-dom";
 
@@ -16,7 +13,7 @@ function App(){
   }
 
   useEffect(() => {
-    axios.get("http://localhost:3000/")
+    axios.get("http://localhost:5000/")
     .then(res => {
       setUsers(res.data);
     })
