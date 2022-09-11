@@ -10,6 +10,9 @@ function Register(){
     password: ""
   });
 
+  const navigate = useNavigate();
+
+
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -20,6 +23,18 @@ function Register(){
       };
     });
   }
+
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/register")
+    .then(res => {
+      setUser(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  });
+
 
   function submitUser(event){
     console.log(user);
@@ -33,34 +48,15 @@ function Register(){
     };
 
     axios.post("http://localhost:5000/", data, headers)
-    .then(res => console.log(res.data));
+    .then(res => console.log(res.data), navigate("/submit"));
 
     setUser({
       email: "",
       password: ""
     });
+
     event.preventDefault();
-  }
-
-
-
-
-
-  // function addUser(newUser){
-  //   setUsers(prevUsers => {
-  //     return [...prevUsers, newUser];
-  //   });
-  // }
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/register")
-    .then(res => {
-      setUser(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  });
+  };
 
 
   return (
@@ -79,7 +75,7 @@ function Register(){
                   <input
                   type="email"
                   className="form-control"
-                  name="username"
+                  name="email"
                   placeholder="Enter your email"
                   onChange={handleChange}
                   value={user.email}
@@ -99,7 +95,9 @@ function Register(){
                   />
 
                 </div>
-                <button type="submit" onClick={submitUser} className="btn btn-dark">Register</button>
+                <button type="submit"
+                onClick={submitUser}
+                className="btn btn-dark">Register</button>
               </form>
 
             </div>
