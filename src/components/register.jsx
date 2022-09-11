@@ -5,14 +5,13 @@ import qs from "qs";
 
 
 function Register(){
+
   const [user, setUser] = useState({
     email: "",
     password: ""
   });
 
   const navigate = useNavigate();
-
-
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -26,7 +25,7 @@ function Register(){
 
 
   useEffect(() => {
-    axios.get("http://localhost:5000/register")
+    axios.get("http://localhost:5000/register/")
     .then(res => {
       setUser(res.data);
     })
@@ -47,7 +46,7 @@ function Register(){
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     };
 
-    axios.post("http://localhost:5000/", data, headers)
+    axios.post("http://localhost:5000/register/", data, headers)
     .then(res => console.log(res.data), navigate("/submit"));
 
     setUser({
