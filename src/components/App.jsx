@@ -19,7 +19,7 @@ function App(){
   }
 
   useEffect(() => {
-    axios.get("http://localhost:5000/register/")
+    axios.get("http://localhost:5000/register")
     .then(res => {
         setUsers(res.data);
     })
