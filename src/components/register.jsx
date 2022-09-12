@@ -12,6 +12,7 @@ function Register(){
   });
 
   const navigate = useNavigate();
+
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -44,16 +45,6 @@ function Register(){
 
     event.preventDefault();
   };
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/users/register")
-    .then(res => {
-      setUser(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  });
 
 
   return (

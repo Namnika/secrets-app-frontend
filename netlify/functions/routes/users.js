@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
-let User = require("../models/user.model");
+let User = require("../models/user.model.js");
 
 
 router.use(bodyParser.urlencoded({extended: true}));

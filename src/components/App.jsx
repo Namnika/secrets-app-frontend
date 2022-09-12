@@ -12,14 +12,8 @@ import axios from "axios";
 function App(){
   const [users, setUsers] = useState([]);
 
-  function addUser(newUser) {
-    setUsers(prevUsers => {
-      return [...prevUsers, newUser];
-    });
-  }
-
   useEffect(() => {
-    axios.get("http://localhost:5000/users/register")
+    axios.get("http://localhost:5000/users/")
     .then(res => {
         setUsers(res.data);
     })
@@ -29,13 +23,20 @@ function App(){
   });
 
 
+  function addUser(newUser) {
+    setUsers(prevUsers => {
+      return [...prevUsers, newUser];
+    });
+  }
+
+
   return (
 
       <div className="app">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={users.map((user) =>
+          <Route exact path="login" element={<Login />} />
+          <Route exact path="register" element={users.map((user) =>
             {
               return(
                 <Register
@@ -47,8 +48,8 @@ function App(){
               )
             } />
 
-          <Route path="submit" element={<Submit />} />
-          <Route path="secrets" element={<Secrets />} />
+          <Route exact path="submit" element={<Submit />} />
+          <Route exact path="secrets" element={<Secrets />} />
         </Routes>
       </div>
   );

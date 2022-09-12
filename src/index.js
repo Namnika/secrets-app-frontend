@@ -12,11 +12,11 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
-      <Route index path="/" element={ <App /> }/>
-      <Route path="/login" element={ <Login /> }/>
-      <Route path="/register" element={ <Register /> } />
-      <Route path="/submit" element={ <Submit /> } />
-      <Route path="/secrets" element={ <Secrets /> } />
+      <Route index path="/*" element={ <App /> }/>
+      <Route exact path="/login" element={ <Login /> }/>
+      <Route exact path="/register" element={ <Register /> } />
+      <Route exact path="/submit" element={ <Submit /> } />
+      <Route exact path="/secrets" element={ <Secrets /> } />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>, document.getElementById("root"));
