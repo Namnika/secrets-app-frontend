@@ -1,18 +1,16 @@
-
 import React from "react";
-
-
+import { Link } from "react-router-dom";
 
 function Home(){
   return (
-    <div class="jumbotron centered home">
-      <div class="container">
-        <i class="fas fa-key fa-6x"></i>
-        <h1 class="display-3">Secrets</h1>
-        <p class="lead">Don't keep your secrets, share them anonymously!</p>
+    <div className="jumbotron centered home">
+      <div className="container">
+        <i className="fas fa-key fa-6x"></i>
+        <h1 className="display-3">Secrets</h1>
+        <p className="lead">Don't keep your secrets, share them anonymously!</p>
         <hr/>
-        <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
-        <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
+        <Link role="button" className="btn btn-light btn-lg" to="/register">Register</Link>
+        <Link role="button" className="btn btn-dark btn-lg" to="/login">Login</Link>
 
       </div>
     </div>

@@ -19,7 +19,7 @@ function App(){
   }
 
   useEffect(() => {
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:5000/users/register")
     .then(res => {
         setUsers(res.data);
     })
@@ -33,7 +33,7 @@ function App(){
 
       <div className="app">
         <Routes>
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={users.map((user) =>
             {

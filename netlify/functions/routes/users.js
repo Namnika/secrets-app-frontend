@@ -10,7 +10,7 @@ router.route("/").get((req, res) => {
   .catch(err => res.status(400).json("Error: " + err))
 });
 
-router.route("/").post((req, res) => {
+router.route("/register").post((req, res) => {
   const newUser = new User({
     email: req.body.email,
     password: req.body.password

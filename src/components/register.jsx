@@ -23,10 +23,6 @@ function Register(){
     });
   }
 
-
-
-
-
   function submitUser(event){
     console.log(user);
 
@@ -38,7 +34,7 @@ function Register(){
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     };
 
-    axios.post("http://localhost:5000/register", data, headers)
+    axios.post("http://localhost:5000/users/register", data, headers)
     .then(res => console.log(res.data), navigate("/submit"));
 
     setUser({
@@ -50,7 +46,7 @@ function Register(){
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/register")
+    axios.get("http://localhost:5000/users/register")
     .then(res => {
       setUser(res.data);
     })
@@ -69,7 +65,7 @@ function Register(){
           <div className="card">
             <div className="card-body">
 
-              <form action="/register" method="POST">
+              <form>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
 

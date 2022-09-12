@@ -10,9 +10,9 @@ import Secrets from "./components/secrets";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter>
     <Routes>
-      <Route index path="*" element={ <App /> }/>
+      <Route index path="/" element={ <App /> }/>
       <Route path="/login" element={ <Login /> }/>
       <Route path="/register" element={ <Register /> } />
       <Route path="/submit" element={ <Submit /> } />
