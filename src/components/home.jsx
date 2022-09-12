@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/* [<Link role="button" className="btn btn-light btn-lg" to="/register">Register</Link>] ==>>
+  LINK is used to render the pages using button, navlinks etc.
+ */
+
 function Home(){
   return (
     <div className="jumbotron centered home">

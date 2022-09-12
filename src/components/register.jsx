@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import qs from "qs";
@@ -35,6 +35,12 @@ function Register(){
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     };
 
+    /* [axios.post("http://localhost:5000/users/register", data, headers)] ==>>
+      it is used for to post user's data to register page using "users/register".
+    */
+
+    /* [navigate("/submit")] is to simply navigate or to locate components */
+
     axios.post("http://localhost:5000/users/register", data, headers)
     .then(res => console.log(res.data), navigate("/submit"));
 
@@ -46,6 +52,9 @@ function Register(){
     event.preventDefault();
   };
 
+/* FOR TEXT NODE COMMENTS IN REACT: PUT COMMENTS INSIDE BRACES INSTALL PLUGIN
+ "eslint-plugin-react"
+*/
 
   return (
     <div className="container mt-5 home">
@@ -57,6 +66,11 @@ function Register(){
             <div className="card-body">
 
               <form>
+
+              {/* don't use "action=''" & "method: POST" while using axios routing
+              cause it's doing same thing.
+              */}
+
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
 
@@ -72,6 +86,9 @@ function Register(){
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
+
+                  {/* [<label htmlFor="password" >] ==>> "htmlFor" is used in react
+                  instead of for in simple label in html*/}
 
                   <input
                   type="password"
