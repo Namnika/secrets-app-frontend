@@ -65,7 +65,7 @@ function Register(){
           <div className="card">
             <div className="card-body">
 
-              <form>
+              <form onClick={submitUser}>
 
               {/* don't use "action=''" & "method: POST" while using axios routing
               cause it's doing same thing.
@@ -101,7 +101,6 @@ function Register(){
 
                 </div>
                 <button type="submit"
-                onClick={submitUser}
                 className="btn btn-dark">Register</button>
               </form>
 

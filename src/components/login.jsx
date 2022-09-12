@@ -1,49 +1,52 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 function Login(){
-  const users = [
-    {
-      username: "admin1",
-      password: "123"
-    },
-    {
-      username: 'admin2',
-      password: '789'
-    }
-  ]
 
   const navigate = useNavigate();
   const [isShown, setIsShown] = useState(false);
+  const [users, setUsers] = useState([]);
+
+
   const [data, setData] = useState({
-    username: "",
+    email: "",
     password: ""
   });
 
-  const changeHandler = (event) => {
-    setData({...data,
-      [event.target.name]: event.target.value
-    });
-  };
+  console.log(data);
+
+  function changeHandler(event){
+    const {name, value} = event.target;
+
+    setData((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value
+      }
+    })
+    };
 
 
-
-  const handleSubmit = (event) => {
+function handleSubmit(event){
     event.preventDefault();
 
     const userCheck = users.find(user =>
-      (user.username === data.username && user.password === data.password));
+      (user.email === data.email && user.password === data.password));
     if (userCheck){
       setIsShown(true);
     }else {
       setIsShown(false);
-    }
-  }
+    };
+
+    // axios.post("http://localhost:5000/users/")
+    // .then(res => console.log(res.data))
 
 
+  };
 
-  return (
+
+return (
     <div className="container mt-5 home">
     <h1>Login</h1>
 
@@ -60,10 +63,11 @@ function Login(){
                 <input
                 type="email"
                 className="form-control"
-                name="username" required
+                name="email" required
                 placeholder="Enter your email"
                 value={data.username}
-                onChange={changeHandler}/>
+                onChange={changeHandler}
+                />
 
               </div>
               <div className="form-group">
@@ -76,7 +80,8 @@ function Login(){
                 name="password" required
                 placeholder="Enter your password"
                 value={data.password}
-                onChange={changeHandler}/>
+                onChange={changeHandler}
+                />
 
               </div>
               <button type="submit"  className="btn btn-dark">Login</button>
@@ -88,6 +93,6 @@ function Login(){
     </div>
   </div>
     )
-}
+};
 
 export default Login;
