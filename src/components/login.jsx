@@ -25,7 +25,7 @@ function Login(){
         ...prevValue,
         [name]: value
       }
-    })
+    });
     };
 
 
@@ -57,7 +57,7 @@ return (
           <div className="card-body">
 
 
-            <form onClick={handleSubmit}>
+            <form >
               <div className="form-group">
                 <label htmlFor="email">Email</label>
 
@@ -85,8 +85,8 @@ return (
                 />
 
               </div>
-              <button type="submit"  className="btn btn-dark">Login</button>
-              // {isShown && navigate("/submit")}
+              <button type="submit" onClick={handleSubmit} className="btn btn-dark">Login</button>
+              {isShown && navigate("/submit")}
               </form>
           </div>
         </div>
