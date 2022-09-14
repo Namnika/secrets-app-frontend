@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 function Login(){
 
@@ -9,12 +9,13 @@ function Login(){
   const [users, setUsers] = useState([]);
 
 
+
   const [data, setData] = useState({
     email: "",
     password: ""
   });
 
-  console.log(data);
+
 
   function changeHandler(event){
     const {name, value} = event.target;
@@ -85,7 +86,7 @@ return (
 
               </div>
               <button type="submit"  className="btn btn-dark">Login</button>
-              {isShown && navigate("/submit")}
+              // {isShown && navigate("/submit")}
               </form>
           </div>
         </div>
