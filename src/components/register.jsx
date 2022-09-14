@@ -56,6 +56,11 @@ function Register(){
  "eslint-plugin-react"
 */
 
+
+
+
+
+
   return (
     <div className="container mt-5 home">
       <h1>Register</h1>
@@ -65,11 +70,11 @@ function Register(){
           <div className="card">
             <div className="card-body">
 
-              <form onClick={submitUser}>
+              <form >
+                {/* don't use "action=''" & "method: POST" while using axios routing
+                cause it's doing same thing.
+                */}
 
-              {/* don't use "action=''" & "method: POST" while using axios routing
-              cause it's doing same thing.
-              */}
 
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
@@ -87,8 +92,10 @@ function Register(){
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
 
+
                   {/* [<label htmlFor="password" >] ==>> "htmlFor" is used in react
                   instead of for in simple label in html*/}
+
 
                   <input
                   type="password"
@@ -101,7 +108,7 @@ function Register(){
 
                 </div>
                 <button type="submit"
-                className="btn btn-dark">Register</button>
+                className="btn btn-dark" onClick={submitUser}>Register</button>
               </form>
 
             </div>
