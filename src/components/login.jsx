@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 function Login(){
 
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
   const [isShown, setIsShown] = useState(false);
   const navigate = useNavigate();
 
@@ -22,7 +25,9 @@ function Login(){
         [name]: value
       };
     });
-  };
+  }
+
+
 
   function handleSubmit(event){
     event.preventDefault();

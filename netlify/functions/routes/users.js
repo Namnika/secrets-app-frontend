@@ -43,4 +43,32 @@ router.route("/register").post((req, res) => {
 
 
 
+router.route("/login").post((req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({email}, function(err, user){
+    if (err) {
+      console.error(err);
+      return res.status(500).json(errors);
+    }
+    else if (!user) {
+      return res.status(401).json(errors);
+    }
+    else {
+      user.isCorrectPassword(password, function(err, same){
+        if (err) {
+          console.error(err);
+          return res.status(500).json(errors);
+        }
+        else if (!same) {
+          return res.status(401).json(errors);
+        }
+        else{
+          res.redirect("/secrets");
+        }
+      });
+    };
+  });
+});
+
 module.exports = router;
