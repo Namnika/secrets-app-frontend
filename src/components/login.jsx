@@ -1,33 +1,45 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 
 function Login(){
 
-  const [user, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
   const [isShown, setIsShown] = useState(false);
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     email: "",
     password: ""
   });
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setUser((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  };
 
   function handleSubmit(event){
     event.preventDefault();
-    const userCheck = (user) => users.findOne({
+    const userCheck = (user) => user.findOne(
       data.email === user.email && data.password === user.password
-    });
+    );
 
-    if(userCheck){
-      setIsShown(true);
-    }
-    else{
-      setIsShown(false);
-    }
-  };
+  if(userCheck){
 
-  return (
+    setIsShown(true);
+  }
+  else{
+    setIsShown(false);
+  }
+};
+
+return (
     <div className="container mt-5 home">
       <h1>Login</h1>
 
@@ -44,6 +56,7 @@ function Login(){
 
                   <input
                   type="email"
+                  placeholder="Enter your email"
                   className="form-control"
                   name="email"
                   required
@@ -59,6 +72,7 @@ function Login(){
                   <input
                   type="password"
                   className="form-control"
+                  placeholder="Enter your password"
                   name="password"
                   required
                   onChange={handleChange}
@@ -68,6 +82,9 @@ function Login(){
                 </div>
                 <button type="submit" onClick={handleSubmit}
                 className="btn btn-dark">Login</button>
+
+                {isShown && navigate("/submit")}
+
               </form>
 
             </div>
@@ -76,8 +93,7 @@ function Login(){
       </div>
     </div>
 
-
   );
-}
+};
 
 export default Login;
