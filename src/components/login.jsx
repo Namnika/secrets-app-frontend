@@ -1,47 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
+HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
+*/
 
 function Login(){
 
-  const [user, setUser] = useState({
+  const [state, setState] = useState({
     email: "",
     password: ""
   });
-  const [isShown, setIsShown] = useState(false);
   const navigate = useNavigate();
-
-  const [data, setData] = useState({
-    email: "",
-    password: ""
-  });
 
   function handleChange(event) {
     const { name, value } = event.target;
-
-    setUser((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value
-      };
-    });
-  }
-
+    setState({[name]: value});
+  };
 
 
   function handleSubmit(event){
     event.preventDefault();
-    const userCheck = (user) => user.findOne(
-      data.email === user.email && data.password === user.password
-    );
-
-  if(userCheck){
-
-    setIsShown(true);
-  }
-  else{
-    setIsShown(false);
-  }
+    navigate("/submit");
+    console.log("Login Successfully!");
 };
 
 return (
@@ -66,7 +47,7 @@ return (
                   name="email"
                   required
                   onChange={handleChange}
-                  value={user.email}
+                  value={state.email}
                   />
 
                 </div>
@@ -81,14 +62,12 @@ return (
                   name="password"
                   required
                   onChange={handleChange}
-                  value={user.password}
+                  value={state.password}
                   />
 
                 </div>
                 <button type="submit" onClick={handleSubmit}
                 className="btn btn-dark">Login</button>
-
-                {isShown && navigate("/submit")}
 
               </form>
 

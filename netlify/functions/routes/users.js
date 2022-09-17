@@ -1,11 +1,13 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express.Router();
 const bodyParser = require("body-parser");
+
 let User = require("../models/user.model.js");
 
 
-router.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 
-/* [router.route("/").get((req, res)] ==>> router.route("/") is equal
+/* [app.route("/").get((req, res)] ==>> app.route("/") is equal
  to [app.use("/users", usersRouter);] It means when ("/users") is used then it'll match
  to ("/") & when ("/users/something") is used then it'll match to ("/something").
 
@@ -16,9 +18,9 @@ router.use(bodyParser.urlencoded({extended: true}));
  where all array of users are creating.
  */
 
-router.route("/").get((req, res) => {
+app.get("/", (req, res) => {
   User.find()
-  .then(users = res.json(users))
+  .then(users => res.json(users))
   .catch(err => res.status(400).json("Error: " + err))
 });
 
@@ -29,7 +31,11 @@ to post user's register data to register page.
 /* Always try to catch the error [.catch(err => res.status(400).json("Error: " + err))]
 */
 
-router.route("/register").post((req, res) => {
+app.get("/register", (req, res) => {
+  res.render("register");
+})
+
+app.post("/register", (req, res) => {
   const newUser = new User({
     email: req.body.email,
     password: req.body.password
@@ -41,9 +47,12 @@ router.route("/register").post((req, res) => {
   .catch(err => res.status(400).json("Error: " + err))
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 
-router.route("/login").post((req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   User.findOne({email}, function(err, user){
@@ -71,4 +80,4 @@ router.route("/login").post((req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = app;
