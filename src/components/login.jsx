@@ -1,27 +1,35 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
 HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
 */
 
 function Login(){
-
   const [state, setState] = useState({
     email: "",
     password: ""
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setState({[name]: value});
+    setState({
+      [name]: value}
+    );
   };
-
 
   function handleSubmit(event){
     event.preventDefault();
-    navigate("/submit");
+
+    axios({
+      method: "POST",
+      data: state,
+      withCredentials: true,
+      url: "http://localhost:5000/users/login",
+    }).then((res) => console.log(res));
+
     console.log("Login Successfully!");
 };
 
@@ -34,11 +42,9 @@ return (
           <div className="card">
             <div className="card-body">
 
-
               <form>
                 <div className="form-group">
-
-                  <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email</label>
 
                   <input
                   type="email"
@@ -52,8 +58,7 @@ return (
 
                 </div>
                 <div className="form-group">
-
-                  <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password</label>
 
                   <input
                   type="password"

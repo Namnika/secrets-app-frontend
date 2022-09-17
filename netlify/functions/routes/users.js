@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express.Router();
 const bodyParser = require("body-parser");
-
+const bcrypt = require("bcryptjs");
 let User = require("../models/user.model.js");
 
 
@@ -33,51 +33,37 @@ to post user's register data to register page.
 
 app.get("/register", (req, res) => {
   res.render("register");
-})
-
-app.post("/register", (req, res) => {
-  const newUser = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
-  console.log(newUser);
-
-  newUser.save()
-  .then(()=>res.send("User added!"))
-  .catch(err => res.status(400).json("Error: " + err))
 });
 
-app.get("/login", (req, res) => {
+app.get("/login", function(req, res){
   res.render("login");
 });
 
+app.post("/register", (req, res) => {
+  User.findOne({ email: req.body.email }, async (err, doc) => {
+    if (err){
+      console.log(err);
+      res.redirect("/register");
+    }
+    if (doc){
+      res.send("User Already Exists");
+      // res.redirect("/register");
+    }
+    if (!doc){
+      const hashPassword = await bcrypt.hash(req.body.password, 10);
+      const newUser = new User({
+        email: req.body.email,
+        password: hashPassword
+      });
+      newUser.save();
+      console.log(newUser);
+      res.send("User Created");
+    }
+  })
+});
 
 app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  User.findOne({email}, function(err, user){
-    if (err) {
-      console.error(err);
-      return res.status(500).json(errors);
-    }
-    else if (!user) {
-      return res.status(401).json(errors);
-    }
-    else {
-      user.isCorrectPassword(password, function(err, same){
-        if (err) {
-          console.error(err);
-          return res.status(500).json(errors);
-        }
-        else if (!same) {
-          return res.status(401).json(errors);
-        }
-        else{
-          res.redirect("/secrets");
-        }
-      });
-    };
-  });
+  console.log(req.body);
 });
 
 module.exports = app;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import qs from "qs";
 
@@ -11,7 +11,7 @@ function Register(){
     password: ""
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -41,8 +41,17 @@ function Register(){
 
     /* [navigate("/submit")] is to simply navigate or to locate components */
 
-    axios.post("http://localhost:5000/users/register", data, headers)
-    .then(res => console.log(res.data), navigate("/submit"));
+    axios({
+      method: "POST",
+      data: data,
+      headers: headers,
+      withCredentials: true,
+      url: "http://localhost:5000/users/register",
+    }).then((res) => console.log(res));
+
+
+    // axios.post("http://localhost:5000/users/register", data, headers)
+    // .then(res => console.log(res.data), navigate("/submit"));
 
     setUser({
       email: "",
@@ -55,11 +64,6 @@ function Register(){
 /* FOR TEXT NODE COMMENTS IN REACT: PUT COMMENTS INSIDE BRACES INSTALL PLUGIN
  "eslint-plugin-react"
 */
-
-
-
-
-
 
   return (
     <div className="container mt-5 home">
