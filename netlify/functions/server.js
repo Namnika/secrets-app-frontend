@@ -30,6 +30,10 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(cookieParser("This is my little secret."));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./passportConfig")(passport);
+
 
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -48,3 +52,4 @@ as middleware to request data by using it.
 
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
+// ----------------END OF MIDDLEWARE ------------------------
