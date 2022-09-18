@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+// import qs from "qs";
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
 HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
 */
@@ -26,6 +26,11 @@ function Login(){
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     };
+
+    // const data = qs.stringify({
+    //   email: state.email,
+    //   password: state.password
+    // });
 
     axios({
       method: "POST",

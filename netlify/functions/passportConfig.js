@@ -1,22 +1,25 @@
 const User = require("./models/user.model.js");
 const bcrypt = require("bcryptjs");
-const localStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 // authenticate a user using passport
 module.exports = function(passport){
   passport.use(
-    new localStrategy((email, password, done) => {
+    new LocalStrategy((email, password, done) => {
       User.findOne({email: email}, (err, user) => {
-        if (err) throw err;
+        if (err) return done(err)
         if (!user) return done(null, false) //null is the err and false is the user ===
         // if we've no error there's no user.
+        if (!user.verifyPassword(password)) { return done(null, false); }
+            return done(null, user);
         bcrypt.compare(password, user.password, (err, result) => {
           if (err) throw err;
-          if (result === true){
+          if (result === true) {
             return done(null, user);
           }else{
             return done(null, false);
           }
-        });
+        })
+
       });
     }
   ));
@@ -26,7 +29,7 @@ module.exports = function(passport){
      inside of the browser and when
      user is created using localStrategy . */
   passport.serializeUser((user, cb) => {
-    cd(null, user.id);
+    cb(null, user.id);
   });
 
 
@@ -36,12 +39,12 @@ module.exports = function(passport){
   passport.deserializeUser((id, cb) => {
     /* it will take id as 1st parameter deserializing the cookie, user's id matching
     with the cookie id */
-    User.findOne({email: email}, (err, user) => {
-      const userInfo = {
-        email: user.email,
-      };
+    User.findOne({_id: id}, (err, user) => {
+      // const userInfo = {
+      //   email: user.email,
+      // };
 
-      cb(err, userInfo);
+      cb(err, user);
     })
   })
 };

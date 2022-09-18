@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
-require("./passportConfig.js")(passport);
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
@@ -20,7 +19,7 @@ const app = express();
 
 app.use(cors());
 app.use(cors({
-  // origin: "http://localhost:3000/",  // <! -- location of the react app were connecting to ---->
+  // origin: "http://localhost:3000",  // <! -- location of the react app were connecting to ---->
   credentials: true
 }));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -30,12 +29,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
 app.use(cookieParser("This is my little secret."));
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => app.listen(port, () => console.log("Server is running on port 5000")))
 .catch((err) => console.log(err.message));
 
