@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import qs from "qs";
+import qs from "qs";
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
 HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
 */
@@ -21,25 +21,18 @@ function Login(){
   };
 
   function handleSubmit(event){
-    event.preventDefault();
-
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    };
-
-    // const data = qs.stringify({
-    //   email: state.email,
-    //   password: state.password
-    // });
+    const data = qs.stringify({
+      email: state.email,
+      password: state.password
+    });
 
     axios({
       method: "POST",
-      data: state,
-      headers: headers,
+      data: data,
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => console.log(res));
-
+event.preventDefault();
 };
 
 return (

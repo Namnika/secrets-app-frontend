@@ -19,8 +19,7 @@ const app = express();
 
 app.use(cors());
 app.use(cors({
-  // origin: "http://localhost:3000",  // <! -- location of the react app were connecting to ---->
-  credentials: true
+  credentials: true, origin: 'http://localhost:3000'
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());

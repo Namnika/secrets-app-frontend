@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cors());
 app.use(cors({
-  credentials: true
+  credentials: true, origin: 'http://localhost:3000'
 }));
 app.use(session({
   secret: "This is my little secret.",
@@ -75,30 +75,22 @@ app.post("/register", (req, res) => {
   })
 });
 
-app.get("/login", function(req, res){
-  res.render("login");
-});
 
-
-app.post("/login", (req, res) => {
+app.post("/login", (req, res, next) => {
   console.log(req.body);
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
 
 
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) res.send("No User Exists!");
-    if (user) {
-      req.Login(user, err => {
+    else{
+      req.logIn(user, err => {
         if (err) throw err;
         res.send("Successfully Authenticated");
         console.log(res);
       })
     }
-  })
+  })(req, res, next);
 
 });
 
