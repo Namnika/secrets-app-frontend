@@ -2,13 +2,12 @@ const express = require("express");
 const app = express.Router();
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
-let User = require("../models/user.model.js");
 const passport = require("passport");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 require("../passportConfig.js")(passport);
-
+let User = require("../models/user.model.js");
 app.use(bodyParser.urlencoded({extended: true}));
 
 /* [app.route("/").get((req, res)] ==>> app.route("/") is equal
