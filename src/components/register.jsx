@@ -50,9 +50,6 @@ function Register(){
     }).then((res) => console.log(res));
 
 
-    // axios.post("http://localhost:5000/users/register", data, headers)
-    // .then(res => console.log(res.data), navigate("/submit"));
-
     setUser({
       email: "",
       password: ""

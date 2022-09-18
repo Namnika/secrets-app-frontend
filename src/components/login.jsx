@@ -23,14 +23,18 @@ function Login(){
   function handleSubmit(event){
     event.preventDefault();
 
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    };
+
     axios({
       method: "POST",
       data: state,
+      headers: headers,
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => console.log(res));
 
-    console.log("Login Successfully!");
 };
 
 return (

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 let User = require("../models/user.model.js");
 const passport = require("passport");
+
 require("../passportConfig.js")(passport);
 
 app.use(bodyParser.urlencoded({extended: true}));

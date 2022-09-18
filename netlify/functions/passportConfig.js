@@ -1,8 +1,7 @@
-// authenticate a user using passport
 const User = require("./models/user.model.js");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
-
+// authenticate a user using passport
 module.exports = function(passport){
   passport.use(
     new localStrategy((email, password, done) => {
@@ -37,8 +36,12 @@ module.exports = function(passport){
   passport.deserializeUser((id, cb) => {
     /* it will take id as 1st parameter deserializing the cookie, user's id matching
     with the cookie id */
-    User.findOne({_id: id}, (err, user) => {
-      cb(err, user);
+    User.findOne({email: email}, (err, user) => {
+      const userInfo = {
+        email: user.email,
+      };
+
+      cb(err, userInfo);
     })
   })
 };

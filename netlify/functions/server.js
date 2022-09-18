@@ -4,12 +4,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const passportLocal = require("passport-local");
+require("./passportConfig.js")(passport);
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const port = process.env.PORT || 5000;
 const app = express();
+
 
 /* [CORS] is basically serves the data from yr server via browser of what the user
   accepts or requirements to that domain ex. localhost:3000 .
@@ -19,7 +20,7 @@ const app = express();
 
 app.use(cors());
 app.use(cors({
-  origin: "http://localhost:3000",  // <! -- location of the react app were connecting to ---->
+  // origin: "http://localhost:3000/",  // <! -- location of the react app were connecting to ---->
   credentials: true
 }));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -32,8 +33,6 @@ app.use(session({
 app.use(cookieParser("This is my little secret."));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportConfig")(passport);
-
 
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
