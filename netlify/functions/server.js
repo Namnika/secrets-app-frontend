@@ -22,7 +22,8 @@ app.use(cors({
   credentials: true, origin: 'http://localhost:3000'
 }));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.json());
+app.use(express.static("public"));
+app.engine('jsx',require('express-react src').createEngine(options));
 app.use(expressSession({
   secret: "This is my little secret.",
   resave: false,
@@ -72,6 +73,19 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  next(err);
+  res.render('error', {
+  message: err.message,
+  error: {}
+  });
+});
+
+
 
 
 /* [app.use("/users", usersRouter);] ==>> ["/users"] is register for usersRouter
