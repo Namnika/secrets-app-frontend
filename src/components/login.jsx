@@ -7,7 +7,7 @@ HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-ba
 */
 
 function Login(){
-  const [state, setState] = useState({
+  const [user, setUser] = useState({
     email: "",
     password: ""
   });
@@ -15,24 +15,44 @@ function Login(){
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setState({
-      [name]: value}
-    );
+    setUser({...user, [name]: value});
+
+
+    console.log(event.target.name);
+    console.log(event.target.value);
   };
 
   function handleSubmit(event){
     const data = qs.stringify({
-      email: state.email,
-      password: state.password
+      email: user.email,
+      password: user.password
     });
 
-    axios({
-      method: "POST",
-      data: data,
-      withCredentials: true,
-      url: "http://localhost:5000/users/login",
-    }).then((res) => console.log(res));
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+
+    axios.post("http://localhost:5000/users/login", {withCredentials: true}, data, headers)
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err))
+
+    setUser({
+      email: "",
+      password: ""
+    });
+
+    // axios({
+    //   method: "POST",
+    //   data: {
+    //     email: user.email,
+    //     password: user.password
+    //   },
+    //   withCredentials: true,
+    //   url: "http://localhost:5000/users/login",
+    // }).then((res) => console.log(res));
+    //
 event.preventDefault();
+
 };
 
 return (
@@ -49,13 +69,13 @@ return (
                 <label htmlFor="email">Email</label>
 
                   <input
-                  type="email"
+                  type="text"
                   placeholder="Enter your email"
                   className="form-control"
                   name="email"
                   required
                   onChange={handleChange}
-                  value={state.email}
+                  value={user.email}
                   />
 
                 </div>
@@ -69,7 +89,7 @@ return (
                   name="password"
                   required
                   onChange={handleChange}
-                  value={state.password}
+                  value={user.password}
                   />
 
                 </div>

@@ -6,8 +6,9 @@ const passport = require("passport");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-require("../passportConfig.js")(passport);
-let User = require("../models/user.model.js");
+const LocalStrategy = require("passport-local").Strategy;
+let User = require("../models/user.model");
+require("../passportConfig")(passport);
 app.use(bodyParser.urlencoded({extended: true}));
 
 /* [app.route("/").get((req, res)] ==>> app.route("/") is equal
@@ -33,6 +34,50 @@ app.use(session({
 app.use(cookieParser("This is my little secret."));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+passport.use(
+  new LocalStrategy((email, password, done) => {
+    User.findOne({email: email}, (err, user) => {
+      if (err) return done(err)
+      if (!user) return done(null, false) //null is the err and false is the user ===
+      // if we've no error there's no user.
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) throw err;
+        if (result === true) {
+          return done(null, user);
+        }else{
+          return done(null, false);
+        }
+      })
+
+    });
+  }
+));
+
+passport.serializeUser((user, cb) => {
+  cb(null, user.id);
+});
+
+passport.deserializeUser((id, cb) => {
+
+  /* it will take id as 1st parameter deserializing the cookie, user's id matching
+  with the cookie id */
+
+  User.findOne({_id: id}, (err, user) => {
+    const userInfo = {
+      email: user.email,
+    };
+
+    cb(err, user);
+  }
+)
+})
+
+
+
+
 
 
 app.get("/", (req, res) => {
@@ -77,10 +122,16 @@ app.post("/register", (req, res) => {
 
 
 app.post("/login", (req, res, next) => {
-  console.log(req.body);
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password
+  });
 
 
-  passport.authenticate("local", (err, user, info) => {
+
+  next()
+
+  passport.authenticate("local", (err, user) => {
     if (err) throw err;
     if (!user) res.send("No User Exists!");
     else{
