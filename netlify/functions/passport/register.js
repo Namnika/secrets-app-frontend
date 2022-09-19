@@ -1,5 +1,5 @@
-const LocalStrategy   = require('passport-local').Strategy;
-const User = require('../models/user');
+const LocalStrategy = require('passport-local').Strategy;
+let User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 /* CTRL + SHIFT AND PUT CURSOR WHERE YOU WANT TO EDIT */
 

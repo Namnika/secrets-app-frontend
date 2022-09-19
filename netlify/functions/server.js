@@ -51,7 +51,7 @@ const flash = require('connect-flash');
 app.use(flash());
 
 // Initialize Passport
-const initPassport = require('./passport/init');
+const initPassport = require('../functions/passport/init');
 initPassport(passport);
 
 /// catch 404 and forward to error handler
@@ -72,7 +72,6 @@ if (app.get('env') === 'development') {
         });
     });
 }
-
 
 
 /* [app.use("/users", usersRouter);] ==>> ["/users"] is register for usersRouter
