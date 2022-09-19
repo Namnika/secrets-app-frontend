@@ -141,7 +141,7 @@ var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	// if the user is not authenticated then redirect him to the login page
-	res.redirect('/login');
+	res.redirect('/');
 }
 
 module.exports = function(passport){
@@ -149,13 +149,13 @@ module.exports = function(passport){
   /* GET login page. */
   app.get('/', function(req, res) {
   // Display the Login page with any flash message, if any
-	res.render('home', { message: req.flash('message') });
+	res.render('login', { message: req.flash('message') });
 	});
 
   /* Handle Login POST */
 	app.post('/login', passport.authenticate('login', {
 		successRedirect: '/secrets',
-		failureRedirect: '/login',
+		failureRedirect: '/',
 		failureFlash : true
 	}));
 
@@ -166,7 +166,7 @@ module.exports = function(passport){
 
   /* Handle Registration POST */
 	app.post('/register', passport.authenticate('register', {
-		successRedirect: '/secrets',
+		successRedirect: '/home',
 		failureRedirect: '/register',
 		failureFlash : true
 	}));

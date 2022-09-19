@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
@@ -22,11 +23,11 @@ app.use(cors({
   credentials: true, origin: 'http://localhost:3000'
 }));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('src', __dirname + '/src');
+app.set('src', path.join(__dirname, 'src'));
 app.set('view engine', 'jsx');
-app.engine('jsx',require('express-react-views').createEngine());
+app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(expressSession({
   secret: "This is my little secret.",
@@ -97,7 +98,7 @@ as middleware to request data by using it.
 */
 
 const usersRouter = require("./routes/users")(passport);
-app.use("/users", usersRouter);
+app.use("/", usersRouter);
 // ----------------END OF MIDDLEWARE ------------------------
 
 module.exports = app;
