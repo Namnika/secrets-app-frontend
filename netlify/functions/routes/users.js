@@ -185,5 +185,4 @@ module.exports = function(passport){
   });
 
     return app;
-
 }
