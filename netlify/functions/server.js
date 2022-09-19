@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
+const expressSession = require("express-session");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -23,11 +23,12 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
-app.use(session({
+app.use(expressSession({
   secret: "This is my little secret.",
   resave: false,
   saveUninitialized: true
 }));
+
 
 app.use(cookieParser("This is my little secret."));
 app.use(passport.initialize());
@@ -44,10 +45,40 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+const flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+const initPassport = require('./passport/init');
+initPassport(passport);
+
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+
+
 /* [app.use("/users", usersRouter);] ==>> ["/users"] is register for usersRouter
 as middleware to request data by using it.
 */
 
-const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users")(passport);
 app.use("/users", usersRouter);
 // ----------------END OF MIDDLEWARE ------------------------
