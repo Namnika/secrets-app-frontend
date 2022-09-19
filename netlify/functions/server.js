@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('src', path.join(__dirname, 'src'));
 app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
+app.engine('jsx', require('express-react-src').createEngine());
 
 app.use(expressSession({
   secret: "This is my little secret.",

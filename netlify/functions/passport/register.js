@@ -3,7 +3,7 @@ let User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 /* CTRL + SHIFT AND PUT CURSOR WHERE YOU WANT TO EDIT */
 
-module.exports = function(passport){
+module.exports = async function(passport){
   passport.use('register', new LocalStrategy({
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
@@ -47,7 +47,7 @@ module.exports = function(passport){
 
   ));
   // Generates hash using bCrypt
-  const createHash = function(password){
+  const createHash = await function(password){
       return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
   }
 
