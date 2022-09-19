@@ -82,3 +82,6 @@ as middleware to request data by using it.
 const usersRouter = require("./routes/users")(passport);
 app.use("/users", usersRouter);
 // ----------------END OF MIDDLEWARE ------------------------
+
+
+module.exports = app;
