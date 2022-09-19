@@ -14,12 +14,12 @@ module.exports = function(passport){
       User.findOne({ 'email': email }, function(err, user){
         // In case of any error, return using the done method
         if (err){
-        console.log('Error in SignUp: ' + err);
+        console.log('Error in Register: ' + err);
         return done(err);
         }
         // already exists
         if (user) {
-        console.log('User already exists with username: '+email);
+        console.log('User already exists with email: '+email);
         return done(null, false, req.flash('message','User Already Exists'));
         } else {
           // if there is no user with that email
