@@ -17,7 +17,7 @@ module.exports = function(passport){
         // Username does not exist, log the error and redirect back
 
         if (!user){
-        console.log('User Not Found with username '+username);
+        console.log('User Not Found with username '+email);
         return done(null, false, req.flash('message', 'User Not found.'));
         }
 
@@ -35,7 +35,7 @@ module.exports = function(passport){
 );
 
     const isValidPassword = function(user, password){
-      return bCrypt.compareSync(password, user.password);
+      return bcrypt.compareSync(password, user.password);
     }
 
 }

@@ -1,6 +1,6 @@
 const LocalStrategy   = require('passport-local').Strategy;
 const User = require('../models/user');
-const bCrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 /* CTRL + SHIFT AND PUT CURSOR WHERE YOU WANT TO EDIT */
 
 module.exports = function(passport){
@@ -48,7 +48,7 @@ module.exports = function(passport){
   ));
   // Generates hash using bCrypt
   const createHash = function(password){
-      return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+      return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
   }
-  
+
 }

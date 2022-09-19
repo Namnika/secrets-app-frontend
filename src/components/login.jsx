@@ -41,18 +41,7 @@ function Login(){
       password: ""
     });
 
-    // axios({
-    //   method: "POST",
-    //   data: {
-    //     email: user.email,
-    //     password: user.password
-    //   },
-    //   withCredentials: true,
-    //   url: "http://localhost:5000/users/login",
-    // }).then((res) => console.log(res));
-    //
 event.preventDefault();
-
 };
 
 return (
