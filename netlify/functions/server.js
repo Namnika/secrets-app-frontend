@@ -22,9 +22,9 @@ app.use(cors({
   credentials: true, origin: 'http://localhost:3000'
 }));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+app.use(express.json());
 
-app.set('views', __dirname + '/src');
+app.set('src', __dirname + '/src');
 app.set('view engine', 'jsx');
 app.engine('jsx',require('express-react-views').createEngine());
 
@@ -59,24 +59,24 @@ app.use(flash());
 const initPassport = require('../functions/passport/init');
 initPassport(passport);
 
-/// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// /// catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// // development error handler
+// // will print stacktrace
+// if (app.get('env') === 'development') {
+//     app.use(function(err, req, res, next) {
+//         res.status(err.status || 500);
+//         res.render('error', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
 
 // production error handler
 // no stacktraces leaked to user

@@ -165,7 +165,7 @@ module.exports = function(passport){
 	});
 
   /* Handle Registration POST */
-	app.post('/register', passport.authenticate('signup', {
+	app.post('/register', passport.authenticate('register', {
 		successRedirect: '/secrets',
 		failureRedirect: '/register',
 		failureFlash : true
