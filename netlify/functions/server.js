@@ -23,7 +23,11 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-app.engine('jsx',require('express-react src').createEngine(options));
+
+app.set('views', __dirname + '/src');
+app.set('view engine', 'jsx');
+app.engine('jsx',require('express-react-views').createEngine());
+
 app.use(expressSession({
   secret: "This is my little secret.",
   resave: false,
