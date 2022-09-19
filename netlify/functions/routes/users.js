@@ -133,6 +133,7 @@ to post user's register data to register page.
 //
 // });
 
+//***************************CODE STARTED**************************
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -143,29 +144,46 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 }
 
+module.exports = function(passport){
 
+  /* GET login page. */
+  app.get('/', function(req, res) {
+  // Display the Login page with any flash message, if any
+	res.render('home', { message: req.flash('message') });
+	});
 
+  /* Handle Login POST */
+	app.post('/login', passport.authenticate('login', {
+		successRedirect: '/secrets',
+		failureRedirect: '/login',
+		failureFlash : true
+	}));
 
+  /* GET Registration Page */
+	app.get('/register', function(req, res){
+		res.render('register',{message: req.flash('message')});
+	});
 
+  /* Handle Registration POST */
+	app.post('/register', passport.authenticate('signup', {
+		successRedirect: '/secrets',
+		failureRedirect: '/register',
+		failureFlash : true
+	}));
 
+  /* GET Home Page */
+	app.get('/home', isAuthenticated, function(req, res){
+		res.render('home', { user: req.user });
+	});
 
+  /* Handle Logout */
+  app.get('/logout',  function(req, res, next) {
+  req.logout(function(err) {
+  if (err) { return next(err); }
+      res.redirect('/')
+	})
+  });
 
+    return app;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = app;
+}
