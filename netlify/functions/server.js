@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 const bodyParser = require('body-parser');
 
+const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
 const auth = require("./routes/auth");
 const app = express();
@@ -29,6 +30,8 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection})
 }));
+
+app.use(cookieParser("This is my small secret"));
 
 // Passport Middleware
 app.use(passport.initialize());
