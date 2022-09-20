@@ -2,13 +2,13 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
-const auth = require("./routes/auth");
+
 const app = express();
 const PORT = 5000;
 
@@ -28,8 +28,11 @@ app.use(session({
   secret: "This is my small secret",
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection})
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI
+  })
 }));
+
 
 app.use(cookieParser("This is my small secret"));
 
@@ -38,6 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+const auth = require("./routes/auth");
 app.use("/api/auth", auth);
 app.get("/", (req, res) => res.send("Good Morning sunshine!"));
 

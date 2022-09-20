@@ -41,13 +41,20 @@ function Register(){
 
     /* [navigate("/submit")] is to simply navigate or to locate components */
 
-    axios({
-      method: "POST",
-      data: data,
-      headers: headers,
-      withCredentials: true,
-      url: "http://localhost:5000/register",
-    }).then(res => console.log(res));
+    axios
+      .post("/api/auth/register", data, headers, {withCredentials: true})
+      .then(res => console.log(res))
+      .catch(err => {
+        console.log(err);
+        console.log(err.response);
+      })
+    // axios({
+    //   method: "POST",
+    //   data: data,
+    //   headers: headers,
+    //   withCredentials: true,
+    //   url: "http://localhost:5000/register",
+    // }).then(res => console.log(res));
 
 
     setUser({
