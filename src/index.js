@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import App from "./components/App";
-import Login from "./components/login";
-import Register from "./components/register";
-import Submit from "./components/submit";
-import Secrets from "./components/secrets";
+import App from "../src/views/components/App";
+import Login from "../src/views/components/login";
+import Register from "../src/views/components/register";
+import Submit from "../src/views/components/submit";
+import Secrets from "../src/views/components/secrets";
 
 /* in package.json of front-end where backend must be connect to that server where
   we are receiving data using axios route : ex "http://localhost:5000/users/".

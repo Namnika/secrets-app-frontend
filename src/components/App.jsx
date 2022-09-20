@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {Routes, Route} from 'react-router-dom';
-import Login from "./login";
-import Home from './home';
-import Register from "./register";
-import Submit from "./submit";
-import Secrets from "./secrets";
+import Login from "../components/login";
+import Home from '../components/home';
+import Register from "../components/register";
+import Submit from "../components/submit";
+import Secrets from "../components/secrets";
 import axios from "axios";
 
 
@@ -13,7 +13,7 @@ function App(){
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:5000/users/")
     .then(res => {
         setUsers(res.data);
     })

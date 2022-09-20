@@ -47,7 +47,7 @@ function Register(){
       headers: headers,
       withCredentials: true,
       url: "http://localhost:5000/register",
-    }).then((res) => console.log(res));
+    }).then(res => console.log(res));
 
 
     setUser({

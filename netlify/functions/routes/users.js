@@ -3,7 +3,7 @@ const app = express.Router();
 // const bodyParser = require("body-parser");
 // const bcrypt = require("bcryptjs");
 // const passport = require("passport");
-// const cors = require("cors");
+const cors = require("cors");
 // const session = require("express-session");
 // const cookieParser = require("cookie-parser");
 // const LocalStrategy = require("passport-local").Strategy;
@@ -22,10 +22,10 @@ const app = express.Router();
  where all array of users are creating.
  */
 
-// app.use(cors());
-// app.use(cors({
-//   credentials: true, origin: 'http://localhost:3000'
-// }));
+app.use(cors());
+app.use(cors({
+  credentials: true, origin: 'http://localhost:3000'
+}));
 // app.use(session({
 //   secret: "This is my little secret.",
 //   resave: false,
@@ -160,19 +160,19 @@ module.exports = function(passport){
 	}));
 
   /* GET Registration Page */
-	app.get('/register', function(req, res){
-		res.render('register',{message: req.flash('message')});
+	app.get('/users/register', function(req, res){
+		res.render('/users/register',{message: req.flash('message')});
 	});
 
   /* Handle Registration POST */
-	app.post('/register', passport.authenticate('register', {
+	app.post('/users/register', passport.authenticate('register', {
 		successRedirect: '/home',
-		failureRedirect: '/register',
+		failureRedirect: '/users/register',
 		failureFlash : true
 	}));
 
   /* GET Home Page */
-	app.get('/home', isAuthenticated, function(req, res){
+	app.get('/', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
 	});
 

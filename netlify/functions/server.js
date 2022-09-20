@@ -24,10 +24,10 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.set('src', path.join(__dirname, 'src'));
+app.set("view options", { layout: false });
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-src').createEngine());
+app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(expressSession({
   secret: "This is my little secret.",
@@ -98,7 +98,7 @@ as middleware to request data by using it.
 */
 
 const usersRouter = require("./routes/users")(passport);
-app.use("/", usersRouter);
+app.use("/users", usersRouter);
 // ----------------END OF MIDDLEWARE ------------------------
 
 module.exports = app;
