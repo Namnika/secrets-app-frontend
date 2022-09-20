@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {Routes, Route} from 'react-router-dom';
-import Login from "../components/login";
-import Home from '../components/home';
-import Register from "../components/register";
-import Submit from "../components/submit";
-import Secrets from "../components/secrets";
+import Login from "./login";
+import Home from './home';
+import Register from "./register";
+import Submit from "./submit";
+import Secrets from "./secrets";
 import axios from "axios";
 
 
