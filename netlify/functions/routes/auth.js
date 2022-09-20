@@ -40,6 +40,8 @@ router.post("/login", (req, res, next) => {
       res.send("successfully Logged In");
       res.redirect("/secrets");
       console.log(req.user);
-    })
-  })
-})
+    });
+  })(req, res, next);
+});
+
+module.exports = router;
