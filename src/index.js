@@ -1,25 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import App from "./components/App";
-import Login from "./components/login";
-import Register from "./components/register";
-import Submit from "./components/submit";
-import Secrets from "./components/secrets";
-
-/* in package.json of front-end where backend must be connect to that server where
-  we are receiving data using axios route : ex "http://localhost:5000/users/".
-  this must be same [axios.get("http://localhost:5000/users/")] === ["proxy": "http://localhost:5000/users/"]
-  in package.json.
-*/
-
-/* RENDERS ALL CREATED COMPONENTS TO "index.js"
-  to run react app, another words "MAIN SRC OF FRONT-END"
-*/
-
-/* [import { BrowserRouter, Routes, Route} from 'react-router-dom';] ==>
-  this is imported for rendering all created components.
-*/
+import * as serviceWorker from './serviceWorker';
 
 /* [ERROR: "You rendered descendant <Routes (or called `useRoutes()`) at "/"
   (under <Route path="/">) but the parent route path has no trailing "*". .....Please
@@ -33,16 +15,8 @@ import Secrets from "./components/secrets";
   Helpful Ref: https://stackoverflow.com/questions/70604020/please-change-the-parent-route-path-to-route-path
 */
 
-
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route index path="/*" element={ <App /> }/>
-      <Route exact path="/login" element={ <Login /> }/>
-      <Route exact path="/register" element={ <Register /> } />
-      <Route exact path="/submit" element={ <Submit /> } />
-      <Route exact path="/secrets" element={ <Secrets /> } />
-    </Routes>
-    </BrowserRouter>
-  </React.StrictMode>, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

@@ -37,9 +37,10 @@ router.post("/login", (req, res, next) => {
       if (err) {
         return res.status(400).json({ errors: err });
       }
-      res.send("successfully Logged In");
+      // res.send("successfully Logged In");
       res.redirect("/secrets");
       console.log(req.user);
+      return res.status(200).json({ success: `logged in ${user.id}` })
     });
   })(req, res, next);
 });
