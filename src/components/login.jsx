@@ -1,98 +1,82 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import qs from "qs";
+
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
 HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
 */
 
 function Login(){
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   // const navigate = useNavigate();
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setUser({...user, [name]: value});
+function onSubmit(event){
+  event.preventDefault();
+  // const headers = {
+  //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  // }
 
-
-    console.log(event.target.name);
-    console.log(event.target.value);
+  const userData = {
+    email,
+    password
   };
+  axios
+    .post("/api/auth/login", userData)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+      console.log(err.response);
+  });
 
-  function handleSubmit(event){
-    const data = qs.stringify({
-      email: user.email,
-      password: user.password
-    });
-
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    }
-
-    axios.post("http://localhost:5000/users/login", {withCredentials: true}, data, headers)
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err))
-
-    setUser({
-      email: "",
-      password: ""
-    });
-
-event.preventDefault();
+  setEmail("");
+  setPassword("");
 };
 
 return (
     <div className="container mt-5 home">
       <h1>Login</h1>
-
       <div className="row">
         <div className="col-sm-8">
           <div className="card">
             <div className="card-body">
-
               <form>
                 <div className="form-group">
                 <label htmlFor="email">Email</label>
-
                   <input
-                  type="text"
-                  placeholder="Enter your email"
+                  type="email"
+                  placeholder="Enter email"
                   className="form-control"
-                  name="email"
                   required
-                  onChange={handleChange}
-                  value={user.email}
+                  onChange={e => {
+                    setEmail(e.target.value);
+                    console.log(email);
+                  }}
                   />
-
                 </div>
                 <div className="form-group">
-                <label htmlFor="password">Password</label>
-
+                  <label htmlFor="password">Password</label>
                   <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Enter your password"
-                  name="password"
-                  required
-                  onChange={handleChange}
-                  value={user.password}
-                  />
-
-                </div>
-                <button type="submit" onClick={handleSubmit}
+                    type="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    required
+                    onChange={e => {
+                      setPassword(e.target.value)
+                    }}
+                    />
+                  </div>
+                <button type="submit" onClick={onSubmit}
                 className="btn btn-dark">Login</button>
-
               </form>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

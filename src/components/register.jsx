@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import qs from "qs";
-
 
 function Register(){
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,11 +17,9 @@ function Register(){
     // const headers = {
     //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     // };
-
     /* [axios.post("http://localhost:5000/users/register", data, headers)] ==>>
       it is used for to post user's data to register page using "users/register".
     */
-
     /* [navigate("/submit")] is to simply navigate or to locate components */
 
     axios
@@ -34,10 +29,8 @@ function Register(){
         console.log(err);
         console.log(err.response);
       });
-      setUser({
-      email: "",
-      password: ""
-    });
+      setEmail("");
+      setPassword("");
   };
 
 /* FOR TEXT NODE COMMENTS IN REACT: PUT COMMENTS INSIDE BRACES INSTALL PLUGIN
@@ -61,7 +54,7 @@ function Register(){
                   <input
                   type="email"
                   className="form-control"
-                  placeholder="Enter your email"
+                  placeholder="Enter email"
                   required
                   onChange={e => {
                     setEmail(e.target.value);
@@ -78,7 +71,7 @@ function Register(){
                   <input
                   type="password"
                   className="form-control"
-                  placeholder="Enter your password"
+                  placeholder="Enter password"
                   onChange={e => {
                     setPassword(e.target.value);
                   }}
