@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from "./login";
 import Home from './home';
 import Register from "./register";
@@ -11,21 +11,18 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-          <Route exact path="/">
-            <Home />
+      <Routes>
+          <Route exact path="/" element={<Home />}>
           </Route>
-          <Route exact path="/login">
-            <Login />
+          <Route exact path="login" element={<Login />}>
           </Route>
-          <Route exact path="/register">
-            <Register />
+          <Route exact path="register" element={<Register />}>
           </Route>
-          <Route exact path="/submit">
-            <Submit />
+          <Route exact path="submit" element={<Submit />}>
           </Route>
-          <Route exact path="/secrets">
-            <Secrets />
+          <Route exact path="secrets" element={<Secrets />}>
           </Route>
+        </Routes>
       </div>
     </Router>
   );

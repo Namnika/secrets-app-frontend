@@ -1,33 +1,36 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register(){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  function onSubmit(event){
+  async function onSubmit(event){
     event.preventDefault();
     const userData = {
       email,
       password
     }
-    // const headers = {
-    //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    // };
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    };
     /* [axios.post("http://localhost:5000/users/register", data, headers)] ==>>
       it is used for to post user's data to register page using "users/register".
     */
     /* [navigate("/submit")] is to simply navigate or to locate components */
 
-    axios
-      .post("/api/auth/register", userData)
-      .then(res => console.log(res))
+
+    axios.post("http://localhost:5000/auth/register", userData, headers, {
+      validateStatus: function (status) {
+      return status < 500; // Resolve only if the status code is less than 500
+      }
+    })
+      .then(res => console.log(res.data))
       .catch(err => {
-        console.log(err);
-        console.log(err.response);
+        console.log(err.message);
       });
       setEmail("");
       setPassword("");
@@ -58,7 +61,7 @@ function Register(){
                   required
                   onChange={e => {
                     setEmail(e.target.value);
-                    console.log(email);
+
                   }}
                   />
                 </div>

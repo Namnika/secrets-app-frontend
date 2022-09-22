@@ -22,11 +22,9 @@ function onSubmit(event){
     email,
     password
   };
-  axios
-    .post("/api/auth/login", userData)
-    .then(res => {
-      console.log(res);
-    })
+  axios.post("http://localhost:5000/auth/login", userData)
+
+    .then(res => {console.log(res)})
     .catch(err => {
       console.log(err);
       console.log(err.response);
