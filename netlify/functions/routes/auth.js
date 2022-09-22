@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user.model");
 
+
 router.route("/").get((req, res) => {
   res.redirect("/login");
 })
@@ -30,7 +31,7 @@ router.post("/register", function(req, res, next){
         return res.status(400).json({ errors: "No user found" });
       }
       
-      res.redirect("/secrets");
+      res.sendFile("/secrets");
       console.log("REGISTERED");
     })(req, res, next);
 });
