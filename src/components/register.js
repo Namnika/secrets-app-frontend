@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,7 +8,7 @@ function Register(){
 
   const navigate = useNavigate();
 
-  async function onSubmit(event){
+  function onSubmit(event){
     event.preventDefault();
     const userData = {
       email,
@@ -21,14 +21,15 @@ function Register(){
       it is used for to post user's data to register page using "users/register".
     */
     /* [navigate("/submit")] is to simply navigate or to locate components */
+    
 
 
-    axios.post("http://localhost:5000/auth/register", userData, headers, {
+    axios.post("http://localhost:5000/register", userData, headers, {
       validateStatus: function (status) {
       return status < 500; // Resolve only if the status code is less than 500
       }
     })
-      .then(res => console.log(res.data))
+      .then(res => console.log(res))
       .catch(err => {
         console.log(err.message);
       });
