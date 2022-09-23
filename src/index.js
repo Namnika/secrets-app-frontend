@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
   Helpful Ref: https://stackoverflow.com/questions/70604020/please-change-the-parent-route-path-to-route-path
 */
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.hydrate(<App />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

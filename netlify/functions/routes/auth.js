@@ -39,7 +39,7 @@ router.post("/register", function(req, res, next){
       if (!user) {
         return res.status(400).json({ errors: "No user found" });
       }
-
+      res.render("/secrets");
       console.log("REGISTERED");
     })(req, res, next);
 });
