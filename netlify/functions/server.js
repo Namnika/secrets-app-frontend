@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
-import react from 'react';
+import React from 'react';
 import ReactDomServer from 'react-dom/server';
 import App from "../../src/components/App";
 // *****babel packages needs to install in client not in server*****
