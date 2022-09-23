@@ -1,4 +1,10 @@
 require("dotenv").config();
+require("@babel/register")({
+  extensions: [".tsx", ".es6", ".es", ".jsx", ".js"]
+});
+require("@babel/core").transformSync("code", {
+  presets: ["@babel/preset-react"],
+});
 const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
@@ -12,9 +18,7 @@ const passport = require("./passport/passportConfig");
 const app = express();
 const PORT = 5000;
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(console.log("Mongodb database connected successfully"))
-.catch(err => console.log(err))
+mongoose.connect(process.env.MONGODB_URI).then(console.log("Mongodb database connected successfully")).catch(err => console.log(err));
 
 app.use(express.static(__dirname + '/src'));
 // app.set('view engine', 'js');
@@ -25,8 +29,8 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true
-}))
-app.use(function(req, res, next) {
+}));
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -41,7 +45,6 @@ app.use(session({
   })
 }));
 
-
 app.use(cookieParser("This is my small secret"));
 
 // Passport Middleware
@@ -54,7 +57,7 @@ app.use("/", authRouter);
 // app.get("/", (req, res) => res.send("Good Morning sunshine!"));
 
 let port = PORT;
-if(port == null || port == "") {
-	port = 5000;
+if (port == null || port == "") {
+  port = 5000;
 }
-app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`))
+app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`));

@@ -4,7 +4,7 @@ import axios from "axios";
 function Secrets(){
   
   useEffect(() => {
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:3000/secrets")
     .then(res => console.log(res.json()))
     .then((result) => {
       console.log(result)

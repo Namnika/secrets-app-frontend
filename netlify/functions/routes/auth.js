@@ -2,7 +2,13 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user.model");
-
+const Secrets = require("../secrets");
+require("@babel/register")({
+  extensions: [".tsx", ".es6", ".es", ".jsx", ".js"]
+});
+require("@babel/core").transformSync("code", {
+  presets: ["@babel/preset-react"],
+});
 
 router.route("/").get((req, res) => {
   res.redirect("/login");
@@ -19,7 +25,7 @@ router.route("/register").get((req, res) => {
 // });
 
 router.route("/secrets").get((req, res) => {
-  res.render("secrets");
+  res.render(<Secrets />);
 });
 
 router.post("/register", function(req, res, next){
@@ -31,7 +37,7 @@ router.post("/register", function(req, res, next){
         return res.status(400).json({ errors: "No user found" });
       }
       
-      res.sendFile("/secrets");
+      res.redirect("/secrets");
       console.log("REGISTERED");
     })(req, res, next);
 });

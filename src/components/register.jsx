@@ -21,7 +21,7 @@ function Register(){
       it is used for to post user's data to register page using "users/register".
     */
     /* [navigate("/submit")] is to simply navigate or to locate components */
-    
+
 
 
     axios.post("http://localhost:5000/register", userData, headers, {
@@ -29,7 +29,10 @@ function Register(){
       return status < 500; // Resolve only if the status code is less than 500
       }
     })
-      .then(res => console.log(res))
+      .then(res => console.log(res)
+      if(userData) {navigate("/secrets")}
+      if(!userData) navigate("/register")
+    )
       .catch(err => {
         console.log(err.message);
       });
