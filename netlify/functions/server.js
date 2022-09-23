@@ -1,4 +1,9 @@
 require("dotenv").config();
+require('@babel/register')({
+    presets: ['@babel/preset-es2015', '@babel/preset-react']
+});
+const renderReact = require('./renderReact.js');
+renderReact(app);
 const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
@@ -9,9 +14,9 @@ const fs = require("fs");
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
-import React from 'react';
-import ReactDomServer from 'react-dom/server';
-import App from "../../src/components/App";
+const React = require("react");
+const ReactDomServer = require("react-dom/server");
+
 // *****babel packages needs to install in client not in server*****
 const app = express();
 const PORT = 5000;
@@ -34,18 +39,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('^/$', (req, res, next) => {
-  fs.readFile(path.resolve('./build/index.html'), 'utf-8', (err, data) => {
-    if(err) {
-      console.log(err);
-      return res.status(500).send("Some error happened");
-    }
-    return res.send(
-      data.replace(
-        '<div id="root"></div>',
-        `<div id="root">${ReactDomServer.renderToString(<App />)}</div>`))
-  })
-})
 
 
 // Express session
