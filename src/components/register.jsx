@@ -29,10 +29,7 @@ function Register(){
       return status < 500; // Resolve only if the status code is less than 500
       }
     })
-      .then(res => console.log(res)
-      if(userData) {navigate("/secrets")}
-      if(!userData) navigate("/register")
-    )
+      .then(res => console.log(res))
       .catch(err => {
         console.log(err.message);
       });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
@@ -10,25 +10,25 @@ function Login(){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
 function onSubmit(event){
   event.preventDefault();
-  // const headers = {
-  //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-  // }
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  }
 
   const userData = {
     email,
     password
   };
-  axios.post("http://localhost:5000/auth/login", userData)
 
-    .then(res => {console.log(res)})
-    .catch(err => {
-      console.log(err);
-      console.log(err.response);
-  });
+  axios.post("http://localhost:5000/login", userData, headers, {
+    validateStatus: function (status) {
+        return status < 500;}
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
 
   setEmail("");
   setPassword("");
@@ -51,7 +51,6 @@ return (
                   required
                   onChange={e => {
                     setEmail(e.target.value);
-                    console.log(email);
                   }}
                   />
                 </div>

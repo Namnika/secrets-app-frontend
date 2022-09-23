@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user.model");
-const Secrets = require("../secrets");
 require("@babel/register")({
   extensions: [".tsx", ".es6", ".es", ".jsx", ".js"]
 });
@@ -20,12 +19,16 @@ router.route("/register").get((req, res) => {
   .catch(err => res.status(400).json("Error: " + err));
 });
 
-// router.route("/login").get((req, res) => {
 
-// });
+router.route("/login").get((req, res) => {
+  User.find()
+  .then(users => res.json(users))
+  .catch(err => res.status(400).json("Error: " + err));
+});
+
 
 router.route("/secrets").get((req, res) => {
-  res.render(<Secrets />);
+  console.log(res.data);
 });
 
 router.post("/register", function(req, res, next){
@@ -36,49 +39,34 @@ router.post("/register", function(req, res, next){
       if (!user) {
         return res.status(400).json({ errors: "No user found" });
       }
-      
-      res.redirect("/secrets");
+
       console.log("REGISTERED");
     })(req, res, next);
 });
 
 
-// router.post("/register", (req, res, next) => {
-//   passport.authenticate("local", function(err, user, info){
-//     if (err) {
-//       return res.status(403).json({ errors: err.response });
-//     }
-//     if (!user) {
-//       return res.status(400).json({ errors: "No user found" });
-//     }
-//     res.send("secrets");
-//
-//   })(req, res, next);
-// });
+router.post("/login", (req, res, next) => {
+  const newUser = new User({
+    email: req.body.email,
+    password: req.body.password
+  });
+  passport.authenticate("local", (err, newUser, info) => {
+    if (err) throw err;
+    if(!newUser) res.send("No NewUser Exists");
+    else{
+      req.logIn(newUser, err =>{
+        if (err) throw err;
+        res.send(`logged in ${newUser._id}`);
+        console.log("successfully logged in");
+        console.log(res.newUser);
+      });
+    }
+  })(req, res, next);
 
-// router.post("/login", (req, res, next) => {
-  // const user = new User({
-  //   email: req.body.email,
-  //   password: req.body.password
-//   });
-// 
-//   passport.authenticate("local", function(err, user, info){
-//     if (err) {
-//       return res.status(400).json({ errors: err });
-//     }
-//     if (!user) {
-//       return res.status(400).json({ errors: "No User Exists" });
-//     }
-//     req.logIn(user, function(err){
-//       if (err) {
-//         return res.status(400).json({ errors: err });
-//       }
-//       // res.send("successfully Logged In");
-//       res.redirect("/secrets");
-//       console.log(req.user);
-//       return res.status(200).json({ success: `logged in ${user.id}` })
-//     });
-//   })(req, res, next);
-// });
+  console.log(newUser);
+  console.log(req.body);
+
+});
+
 
 module.exports = router;
