@@ -1,9 +1,5 @@
 require("dotenv").config();
-require('@babel/register')({
-    presets: ['@babel/preset-es2015', '@babel/preset-react']
-});
-const renderReact = require('./renderReact.js');
-renderReact(app);
+require("./index");
 const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
@@ -16,6 +12,9 @@ const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
 const React = require("react");
 const ReactDomServer = require("react-dom/server");
+// const Secrets = require('../../src/components/secrets.jsx');
+const App = require('../../src/components/App.jsx');
+
 
 // *****babel packages needs to install in client not in server*****
 const app = express();
@@ -23,9 +22,7 @@ const PORT = 5000;
 
 mongoose.connect(process.env.MONGODB_URI).then(console.log("Mongodb database connected successfully")).catch(err => console.log(err));
 
-app.use(express.static(path.resolve(__dirname, '..', '..', 'build')));
-// app.set('view engine', 'js');
-// app.engine('js', require('express-react-views').createEngine());
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -39,7 +36,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+const renderReact = require('./renderReact.js');
+renderReact(app);
 
 // Express session
 app.use(session({

@@ -1,8 +1,8 @@
 require("ignore-styles");
 
 require('@babel/register')({
-  ignore: [/(node_modules)/],
-  presets: ['react', '@babel/preset-es2015'],
+  ignore: [/(node_module)/],
+  presets: ['react', 'env'],
 });
 
 require('./server');
