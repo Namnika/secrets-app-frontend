@@ -15,5 +15,7 @@ module.exports = {
       loader: 'babel-loader'
     }]
   },
-  
+  plugins: [
+    new HtmlWebpackPlugin({template: path.join(__dirname, './public/index.html')})
+  ]
 }
