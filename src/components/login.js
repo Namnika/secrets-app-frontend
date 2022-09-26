@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Secrets from "./secrets";
 import axios from "axios";
 
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
@@ -7,10 +8,20 @@ HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-ba
 */
 
 function Login(){
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [user, setUser] = useState({
+      email: "",
+      password: ""
+    });
 
-  const navigate = useNavigate();
+    let navigate = useNavigate();
+
+    const handleChange = (event) => {
+      const {name, value} = event.target;
+      setUser({
+        ...user, [name] : value
+      });
+    }
+
 
 function onSubmit(event){
   event.preventDefault();
@@ -18,21 +29,18 @@ function onSubmit(event){
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   }
 
-  const userData = {
-    email,
-    password
-  };
-
-  axios.post("http://localhost:5000/login", userData, headers, {
+  axios.post("http://localhost:5000/auth/login", user, headers, {
     validateStatus: function (status) {
         return status < 500;}
     })
     .then(res => console.log(res))
-    .catch(err => console.log(err));
 
-  setEmail("");
-  setPassword("");
-};
+    setUser({
+      email: "",
+      password: ""
+    });
+   navigate("secrets")
+  };
 
 return (
     <div className="container mt-5 home">
@@ -46,24 +54,24 @@ return (
                 <label htmlFor="email">Email</label>
                   <input
                   type="email"
+                  name="email"
                   placeholder="Enter email"
                   className="form-control"
                   required
-                  onChange={e => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  value={user.email}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     placeholder="Enter password"
                     required
-                    onChange={e => {
-                      setPassword(e.target.value)
-                    }}
+                    onChange={handleChange}
+                    value={user.password}
                     />
                   </div>
                 <button type="submit" onClick={onSubmit}

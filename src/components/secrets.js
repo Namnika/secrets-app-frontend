@@ -4,11 +4,11 @@ import axios from "axios";
 
 function Secrets(){
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/secrets")
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err.message));
-  });
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/auth/")
+  //   .then(res => console.log(res.data))
+  //   .catch(err => console.log(err.message));
+  // });
 
   return (
     <div className="jumbotron text-center home">

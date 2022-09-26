@@ -2,34 +2,30 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user.model");
-require("@babel/register")({
-  extensions: [".tsx", ".es6", ".es", ".jsx", ".js"]
-});
-require("@babel/core").transformSync("code", {
-  presets: ["@babel/preset-react"],
-});
 
 router.route("/").get((req, res) => {
-  res.redirect("/login");
-})
-
-router.route("/register").get((req, res) => {
   User.find()
   .then(users => res.json(users))
-  .catch(err => res.status(400).json("Error: " + err));
+  .catch(err => res.status(400).json("Error: " + err))
 });
 
+// router.route("/register").get((req, res) => {
+//   User.find()
+//   .then(users => res.json(users))
+//   .catch(err => res.status(400).json("Error: " + err));
+// });
 
-router.route("/login").get((req, res) => {
-  User.find()
-  .then(users => res.json(users))
-  .catch(err => res.status(400).json("Error: " + err));
-});
 
+// router.get("/login", (req, res) => {
+//   User.find()
+//   .then(users => res.json(users))
+//   .catch(err => res.status(400).json("Error: " + err));
+// });
 
-router.route("/secrets").get((req, res) => {
-  console.log(res.data);
-});
+//
+// router.get("/secrets", (req, res) => {
+//   console.log(res.data);
+// })
 
 router.post("/register", function(req, res, next){
   passport.authenticate("local", function(err, user, info){
@@ -39,7 +35,6 @@ router.post("/register", function(req, res, next){
       if (!user) {
         return res.status(400).json({ errors: "No user found" });
       }
-      res.render("/secrets");
       console.log("REGISTERED");
     })(req, res, next);
 });

@@ -1,28 +1,25 @@
 require("dotenv").config();
-require("./index");
 const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const bodyParser = require('body-parser');
-const fs = require("fs");
-const path = require("path");
+
 const cookieParser = require('cookie-parser');
 const passport = require("./passport/passportConfig");
-const React = require("react");
-const ReactDomServer = require("react-dom/server");
-// const Secrets = require('../../src/components/secrets.jsx');
-const App = require('../../src/components/App.jsx');
+
+/* ***** FOR SSR(SERVER SIDE RENDERING) TO RENDER REACT COMPONENT TO HTML babel packages needs to install in client not in server*****
+ ****** FOR REACT SERVER COMPONENT TO MAKE HIERACHICAL FILES FOR CLIENT AND USER
+ *******WITH EXTENSIONS "filename.client.js" for client "filename.server.js" for user. */
 
 
-// *****babel packages needs to install in client not in server*****
 const app = express();
 const PORT = 5000;
 
 mongoose.connect(process.env.MONGODB_URI).then(console.log("Mongodb database connected successfully")).catch(err => console.log(err));
 
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,8 +33,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-const renderReact = require('./renderReact.js');
-renderReact(app);
 
 // Express session
 app.use(session({
@@ -57,7 +52,7 @@ app.use(passport.session());
 
 // Routes
 const authRouter = require("./routes/auth");
-app.use("/", authRouter);
+app.use("/auth", authRouter);
 // app.get("/", (req, res) => res.send("Good Morning sunshine!"));
 
 let port = PORT;

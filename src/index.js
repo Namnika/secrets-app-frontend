@@ -6,6 +6,9 @@ import * as serviceWorker from './serviceWorker';
 /*
 
 // *****------BABEL AND WEBPACKAGES PACKAGES NEEDS TO INSTALL in CLIENT NOT IN SERVER--------*****
+/* ***** FOR SSR(SERVER SIDE RENDERING) TO RENDER REACT COMPONENT TO HTML babel packages needs to install in client not in server*****
+ ****** FOR REACT SERVER COMPONENT TO MAKE HIERACHICAL FILES FOR CLIENT AND USER
+ *******WITH EXTENSIONS "filename.client.js" for client "filename.server.js" for user.
 
 
  [ERROR: "You rendered descendant <Routes (or called `useRoutes()`) at "/"
@@ -22,7 +25,7 @@ import * as serviceWorker from './serviceWorker';
 
 */
 
-ReactDOM.hydrate(<App {...window.APP_STATE}/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
