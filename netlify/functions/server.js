@@ -38,7 +38,8 @@ app.use(function (req, res, next) {
 app.use(session({
   secret: "This is my small secret",
   resave: false,
-  saveUninitialized: true,
+  cookie: { maxAge: 60000 },
+  saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI
   })
@@ -55,8 +56,4 @@ const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
 // app.get("/", (req, res) => res.send("Good Morning sunshine!"));
 
-let port = PORT;
-if (port == null || port == "") {
-  port = 5000;
-}
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`));

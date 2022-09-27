@@ -1,14 +1,16 @@
 import React, {useEffect} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function Secrets(){
+  let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/auth/")
-  //   .then(res => console.log(res.data))
-  //   .catch(err => console.log(err.message));
-  // });
+  const onSubmit = () => {
+    axios.post("http://localhost:3000/auth/logout", {}, {withCredentials: true})
+    .then(res => console.log(res))
+    navigate("/")
+  }
 
   return (
     <div className="jumbotron text-center home">
@@ -19,8 +21,8 @@ function Secrets(){
         <p className="secret-text"></p>
         <hr/>
 
-        <a className="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
-        <a className="btn btn-dark btn-lg" href="/submit" role="button">Submit a Secret</a>
+        <button className="btn btn-light btn-lg" onClick={onSubmit} type="submit">Log Out</button>
+        <button className="btn btn-dark btn-lg" type="submit">Submit a Secret</button>
       </div>
     </div>
   )

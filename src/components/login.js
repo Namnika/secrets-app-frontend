@@ -39,7 +39,7 @@ function onSubmit(event){
       email: "",
       password: ""
     });
-   navigate("secrets")
+   navigate("/secrets")
   };
 
 return (
