@@ -13,12 +13,17 @@ function Login(){
       password: ""
     });
 
+    // const [users, setUsers] = useState({});
+
+
     let navigate = useNavigate();
 
     const handleChange = (event) => {
       const {name, value} = event.target;
-      setUser({
-        ...user, [name] : value
+      setUser((prevValue) => {
+        return {
+          ...user, [name] : value
+        }
       });
     }
 
@@ -28,18 +33,43 @@ function onSubmit(event){
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   }
+// do authenticaion properly to render submit page
+  axios.post("http://localhost:5000/auth/login", user, headers, async (req, res) => {
+    const user = await User.find({
+      email: req.body.email,
+      password: req.body.pass})
+      if (user) {
+        return res.json({status: "ok", user: true})
+      }else {
+        return res.json({status: "error", user: false})
+      }
 
-  axios.post("http://localhost:5000/auth/login", user, headers, {
-    validateStatus: function (status) {
-        return status < 500;}
-    })
-    .then(res => console.log(res))
+  })
+  .then(res => setUser(res.data))
 
+
+    // console.log(setUser(user));
+
+
+
+
+    // if (user._id && user._id) {
+    //   console.log("logged in");
+    // }else {
+    //   console.log("not logged");
+    // }
+    // if (user) {
+    //   navigate("/secrets")
+    // }
+    // else {
+    //   navigate("/login")
+    // }
     setUser({
       email: "",
       password: ""
     });
-   navigate("/secrets")
+
+
   };
 
 return (

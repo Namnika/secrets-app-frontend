@@ -1,59 +1,53 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
 const express = require("express");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-const cors = require("cors");
-const bodyParser = require('body-parser');
-
-const cookieParser = require('cookie-parser');
-const passport = require("./passport/passportConfig");
-
-/* ***** FOR SSR(SERVER SIDE RENDERING) TO RENDER REACT COMPONENT TO HTML babel packages needs to install in client not in server*****
- ****** FOR REACT SERVER COMPONENT TO MAKE HIERACHICAL FILES FOR CLIENT AND USER
- *******WITH EXTENSIONS "filename.client.js" for client "filename.server.js" for user. */
-
-
 const app = express();
-const PORT = 5000;
+const path = require("path");
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
+const verifyJWT = require('./middleware/verifyJWT');
+const cookieParser = require("cookie-parser");
+const credentials = require('./middleware/credentials');
+const mongoose = require("mongoose");
+const connectDB = require('./config/dbConn');
+const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URI).then(console.log("Mongodb database connected successfully")).catch(err => console.log(err));
+// Connect to MongoDB
+connectDB();
 
-app.use(express.json());
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
-}));
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
+// Cross Origin Resource Sharing
+app.use(cors(corsOptions));
+
+// built-in middleware to handle urlencode form data
+app.use(express.urlencoded({ extended: false }));
+
+
+// built-in middleware for json
+app.use(express.json())
+
+// middleware for cookies
+app.use(cookieParser());
+
+// serve static files
+app.use('/', express.static(path.join(__dirname, "/public")));
+
+// routes
+app.use('/', require('./routes/root'));
+app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+
+app.use(verifyJWT);
+app.use("/employees", require("./routes/api/employees"));
+app.use("/users", require("./routes/api/users"));
+
+
+
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`));
 });
-
-
-// Express session
-app.use(session({
-  secret: "This is my small secret",
-  resave: false,
-  cookie: { maxAge: 60000 },
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI
-  })
-}));
-
-app.use(cookieParser("This is my small secret"));
-
-// Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Routes
-const authRouter = require("./routes/auth");
-app.use("/auth", authRouter);
-// app.get("/", (req, res) => res.send("Good Morning sunshine!"));
-
-app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`));

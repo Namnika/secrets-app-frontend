@@ -1,7 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 function Submit(){
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/submit")
+    .then(res => console.log(res.data))
+
+  });
+
+
+// post submit secrets using axios port : 5000 /auth/submit authentication first
+
   return (
     <div className="container">
       <div className="jumbotron centered">
@@ -14,7 +24,7 @@ function Submit(){
           <div className="form-group">
             <input type="text" className="form-control text-center" name="secret" placeholder="What's your secret?" />
           </div>
-          <Link className="btn btn-dark" type="submit" to="/secrets">Submit</Link>
+          <button className="btn btn-dark" type="submit" to="/secrets">Submit</button>
         </form>
       </div>
     </div>

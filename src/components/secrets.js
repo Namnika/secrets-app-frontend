@@ -4,12 +4,27 @@ import { useNavigate } from "react-router-dom";
 
 
 function Secrets(){
+
+
+
   let navigate = useNavigate();
 
   const onSubmit = () => {
-    axios.post("http://localhost:3000/auth/logout", {}, {withCredentials: true})
+    axios.post("http://localhost:3000/logout", {}, {withCredentials: true})
     .then(res => console.log(res))
     navigate("/")
+  }
+
+  function onSubmitSecret(req, res) {
+
+    axios.get("http://localhost:3000/secrets", {}, {withCredentials: true})
+    .then(res => console.log(res.data))
+  //   if (req.isAuthenticated()){
+  //   console.log("authenticate")
+  //   }else{
+  //   console.log("not authenticate");
+  // }
+    navigate("/submit")
   }
 
   return (
@@ -22,7 +37,7 @@ function Secrets(){
         <hr/>
 
         <button className="btn btn-light btn-lg" onClick={onSubmit} type="submit">Log Out</button>
-        <button className="btn btn-dark btn-lg" type="submit">Submit a Secret</button>
+        <button className="btn btn-dark btn-lg" onClick={onSubmitSecret} type="submit">Submit a Secret</button>
       </div>
     </div>
   )
