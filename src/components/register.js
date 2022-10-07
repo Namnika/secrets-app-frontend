@@ -90,13 +90,6 @@ function Register() {
 
 	let navigate = useNavigate();
 	
-
-
-	/* [axios.post("http://localhost:5000/users/register", data, headers)] ==>>
-			it is used for to post user's data to register page using "users/register".
-	*/
-	/* [navigate("/submit")] is to simply navigate or to locate components 
-	
 	/* FOR TEXT NODE COMMENTS IN REACT: PUT COMMENTS INSIDE BRACES INSTALL PLUGIN
 	"eslint-plugin-react"
 	*/
@@ -122,6 +115,7 @@ function Register() {
 			console.log(response.accessToken);
 			console.log(JSON.stringify(response));
 			setSuccess(true);
+			
 			// clear input fields 
 			setEmail("");
 			setPassword("");

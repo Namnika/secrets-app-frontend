@@ -1,118 +1,139 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import Secrets from "./secrets";
-import axios from "axios";
+import secrets from "./secrets";
+import axios from "../api/axios";
+const LOGIN_URL = "/auth";
 
 /* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
 HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
 */
 
-function Login(){
-    const [user, setUser] = useState({
-      email: "",
-      password: ""
-    });
+function Login() {
+  const { setAuth } = useContext(AuthContext);
+  const emailRef = useRef();
+  const errRef = useRef();
 
-    // const [users, setUsers] = useState({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
 
-    let navigate = useNavigate();
+  useEffect(() => {
+    setErrMsg("");
+  }, [email, password]);
 
-    const handleChange = (event) => {
-      const {name, value} = event.target;
-      setUser((prevValue) => {
-        return {
-          ...user, [name] : value
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ email, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
-      });
-    }
+      );
+      console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response));
+      console.log(response?.data?.accessToken);
+      console.log(response?.data?.roles);
 
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
 
-function onSubmit(event){
-  event.preventDefault();
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-  }
-// do authenticaion properly to render submit page
-  axios.post("http://localhost:5000/auth/login", user, headers, async (req, res) => {
-    const user = await User.find({
-      email: req.body.email,
-      password: req.body.pass})
-      if (user) {
-        return res.json({status: "ok", user: true})
-      }else {
-        return res.json({status: "error", user: false})
+      setAuth({ email, password, roles, accessToken });
+
+      setEmail("");
+      setPassword("");
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Email and Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Hey, Login again!");
+        res.sendStatus(401);
       }
-
-  })
-  .then(res => setUser(res.data))
-
-
-    // console.log(setUser(user));
-
-
-
-
-    // if (user._id && user._id) {
-    //   console.log("logged in");
-    // }else {
-    //   console.log("not logged");
-    // }
-    // if (user) {
-    //   navigate("/secrets")
-    // }
-    // else {
-    //   navigate("/login")
-    // }
-    setUser({
-      email: "",
-      password: ""
-    });
-
-
+    }
   };
 
-return (
-    <div className="container mt-5 home">
-      <h1>Login</h1>
-      <div className="row">
-        <div className="col-sm-8">
-          <div className="card">
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                <label htmlFor="email">Email</label>
-                  <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter email"
-                  className="form-control"
-                  required
-                  onChange={handleChange}
-                  value={user.email}
-                  />
+  return (
+    <>
+      {success ? (
+        navigate("/secrets")
+      ) : (
+        <div className="container mt-5 home">
+          <h1>Login</h1>
+          <div className="row">
+            <div className="col-sm-8">
+              <div className="card">
+                <div className="card-body">
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <p
+                        ref={errRef}
+                        className={errMsg ? "errMsg" : "offscreen"}
+                        aria-live="assertive"
+                      >
+                        {errMsg}
+                      </p>
+
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        ref={emailRef}
+                        placeholder="Enter email"
+                        autoComplete="off"
+                        className="form-control"
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="password">Password</label>
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        className="form-control"
+                        placeholder="Enter password"
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                      />
+                    </div>
+                    <button className="btn btn-dark">Log In</button>
+                    <p className="extraline">
+                      Need an Account?
+                      <br />
+                      <span className="line">
+                        {/* put router link here */}
+                        <a href="./register">Register</a>
+                      </span>
+                    </p>
+                  </form>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    className="form-control"
-                    placeholder="Enter password"
-                    required
-                    onChange={handleChange}
-                    value={user.password}
-                    />
-                  </div>
-                <button type="submit" onClick={onSubmit}
-                className="btn btn-dark">Login</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
-};
+}
 
 export default Login;
