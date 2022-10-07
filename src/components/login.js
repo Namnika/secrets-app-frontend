@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import secrets from "./secrets";
 import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
@@ -13,6 +12,8 @@ function Login() {
   const { setAuth } = useContext(AuthContext);
   const emailRef = useRef();
   const errRef = useRef();
+  const navigate = useNavigate();
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +28,6 @@ function Login() {
     setErrMsg("");
   }, [email, password]);
 
-  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,13 +47,13 @@ function Login() {
       console.log(response?.data?.roles);
 
       const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
 
-      setAuth({ email, password, roles, accessToken });
-
+      setAuth({ email, accessToken }); //no set password, roles in setAuth because setAuth() content stores password for long time 
       setEmail("");
       setPassword("");
       setSuccess(true);
+
+
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -88,6 +88,7 @@ function Login() {
                       >
                         {errMsg}
                       </p>
+                      
 
                       <label htmlFor="email">Email</label>
                       <input
