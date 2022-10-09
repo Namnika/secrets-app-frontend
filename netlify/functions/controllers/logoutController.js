@@ -10,26 +10,16 @@ const handleLogout = async (req, res) => {
   // Is refreshToken in DB?
   const foundUser = await User.findOne({ refreshToken }).exec();
   if (!foundUser) {
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    return res.sendStatus(204);
+    res.clearCookie('jwt', { httpOnly: true, sameSite: "None", secure: true });
+    return res.sendStatus(202);
   }
-
   // Delete refreshToken in DB
-  foundUser.refreshToken = "";
+  foundUser.refreshToken = foundUser.refreshToken.filter(rt => rt !== refreshToken);
   const result = await foundUser.save();
   console.log(result);
 
-  res.clearCookie("jwt", {
-    httpOnly: true,
-    sameSite: "None",
-    secure: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+  res.clearCookie('jwt', { httpOnly: true, sameSite: "None", secure: true });  //cookie isn't clear. yb using this method need to try later.
   res.sendStatus(204); //No Content
-};
-module.exports = { handleLogout };
+}
+
+module.exports = { handleLogout }

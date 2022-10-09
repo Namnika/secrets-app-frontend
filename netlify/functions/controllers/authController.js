@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const handleLogin = async (req, res) => {
-  const cookies = req.cookies;
-
   const { email, password } = req.body;
   if (!email || !password)
     return res
@@ -27,51 +25,24 @@ const handleLogin = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "10m" }
+      { expiresIn: "10s" }
     );
-    const newRefreshToken = jwt.sign(
+    const refreshToken = jwt.sign(
       { email: foundUser.email },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "15m" }
     );
 
-    // Changes to let keyword
-    let newRefreshTokenArray = 
-    !cookies.jwt 
-      ?  foundUser.refreshToken
-      :  foundUser.refreshToken.filter(rt => rt !== cookies.jwt);
-      
-    if(cookies?.jwt) {
-      /* Scenario added here:
-         1) User logs in but never uses RT and does not logout
-         2) RT is stolen
-         3) If 1 & 2, reuse detection is needed to clear all RTs when user logs in
-      */
-      const refreshToken = cookies.jwt;
-      const foundToken = await User.findOne({ refreshToken }).exec();
-
-      //  Detected refresh token reuse!
-      if(!foundToken) {
-         console.log('attempted refresh token reuse at login!')
-        //  clear out ALL previous refresh tokens
-        newRefreshTokenArray = [];
-      }
-      res.clearCookie('jwt', { httpOnly: true, sameSite: "None", secure: true,
-        maxAge: 24 * 60 * 60 * 1000, })
-    }
-
     // Saving refreshToken with current User
-    foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
+    foundUser.refreshToken = refreshToken;
     const result = await foundUser.save();
     console.log(result);
-    console.log(roles);
 
     //   Creates Secure Cookie with refresh token
-    res.cookie("jwt", newRefreshToken, {
+    res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
+      secure: true
     });
      
     // Send authorization roles and refresh token

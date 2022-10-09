@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
+
 import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
@@ -9,11 +10,11 @@ HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-ba
 */
 
 function Login() {
-  const { setAuth } = useContext(AuthContext);
-  const emailRef = useRef();
-  const errRef = useRef();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
 
+  const emailRef = useRef();
+  const errRef = useRef();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,9 +29,9 @@ function Login() {
     setErrMsg("");
   }, [email, password]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(email, password);
     try {
       const response = await axios.post(
@@ -44,16 +45,13 @@ function Login() {
       console.log(JSON.stringify(response?.data));
       console.log(JSON.stringify(response));
       console.log(response?.data?.accessToken);
-      console.log(response?.data?.roles);
 
       const accessToken = response?.data?.accessToken;
 
-      setAuth({ email, accessToken }); //no set password, roles in setAuth because setAuth() content stores password for long time 
+      setAuth({ email, accessToken }); //no set password, roles in setAuth because setAuth() content stores password for long time
       setEmail("");
       setPassword("");
       setSuccess(true);
-
-
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -71,7 +69,7 @@ function Login() {
   return (
     <>
       {success ? (
-        navigate("/secrets")
+        navigate("/submit")
       ) : (
         <div className="container mt-5 home">
           <h1>Login</h1>
@@ -88,7 +86,6 @@ function Login() {
                       >
                         {errMsg}
                       </p>
-                      
 
                       <label htmlFor="email">Email</label>
                       <input
@@ -118,12 +115,13 @@ function Login() {
                       />
                     </div>
                     <button className="btn btn-dark">Log In</button>
+
                     <p className="extraline">
                       Need an Account?
                       <br />
                       <span className="line">
                         {/* put router link here */}
-                        <a href="./register">Register</a>
+                        <Link to="/register">Register</Link>
                       </span>
                     </p>
                   </form>
