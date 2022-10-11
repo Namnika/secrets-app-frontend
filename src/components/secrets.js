@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogout from '../hooks/useLogout';
+import SecretPost from './secretPost';
+import axios from 'axios';
 
-function Secrets(props){
+function Secrets(){
+
 	const navigate = useNavigate();
 	const logout = useLogout();
 
@@ -10,23 +13,34 @@ function Secrets(props){
 		await logout();
 		navigate('/');
 	};
+	
+	const [secrets, setSecrets] = useState([]);
     
-	// const handleSubmit = () => {
-    //    props.onChecked(props.text);
-	//    console.log(props);
-	// }
-
+   
+	const submitSecret = (e) => {
+        e.preventDefault()
+		navigate('/submit')
+	}
+	
 
 	return (
 		<div className="jumbotron text-center home">
 			<div className="container">
 				<i className="fas fa-key fa-6x"></i>
 				<h1 className="display-3">You've Discovered My Secret!</h1>
-				<p className="secret-text">{props.name}</p>
 				<hr/>
+                
+                {secrets.map(() =>  
+					<SecretPost text={secrets[0].text}/>
+				)}
+				
+
 				<button className="btn btn-light btn-lg" onClick={signOut}>Log Out</button>
+
+
 				<button 
 				className="btn btn-dark btn-lg"
+				onClick={submitSecret}
 				>Submit a Secret</button>
 			</div>
 		</div>

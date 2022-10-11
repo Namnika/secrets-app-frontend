@@ -166,6 +166,7 @@ function Register() {
 												ref={emailRef}
 												autoComplete="off"
 												name="email"
+												autoFocus
 												className="form-control"
 												placeholder="Enter email"
 												required

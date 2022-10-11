@@ -93,6 +93,7 @@ function Login() {
                         id="email"
                         name="email"
                         ref={emailRef}
+                        autoFocus
                         placeholder="Enter email"
                         autoComplete="off"
                         className="form-control"
