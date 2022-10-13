@@ -5,7 +5,6 @@ import apiRequest from "./apiRequest";
 
 function Submit(){
 	const API_URL = 'http://localhost:5500/secrets';
-
 	const navigate = useNavigate();
 	const [inputText, setInputText] = useState('');
 	const [secrets, setSecrets] = useState([{}]);
@@ -29,7 +28,7 @@ function Submit(){
 		if (result) setFetchError(result);
 	}
 
-	
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!inputText) return;
