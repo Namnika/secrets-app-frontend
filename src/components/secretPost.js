@@ -1,11 +1,11 @@
 import React from "react";
 
 
-const SecretPost = ({ text }) => {
+const SecretPost = (props) => {
 
 	return (
 		<div>
-			<p className="secret-text">{text}</p>
+			<p className="secret-text">{props.post}</p>
 		</div>
 	)
 }

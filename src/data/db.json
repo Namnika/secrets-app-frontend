@@ -1,0 +1,16 @@
+{
+  "secrets": [
+    {
+      "id": 1,
+      "text": "1st Secret text"
+    },
+    {
+      "id": 2,
+      "text": "this is todolist"
+    },
+    {
+      "id": 3,
+      "text": "gdfg"
+    }
+  ]
+}
