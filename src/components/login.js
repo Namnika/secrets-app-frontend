@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-
+import AuthenticationButtons from "./AuthenticationButtons";
 import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
@@ -115,6 +115,7 @@ function Login() {
                         value={password}
                       />
                     </div>
+					<br />
                     <button className="btn btn-dark">Log In</button>
 
                     <p className="extraline">
@@ -126,6 +127,7 @@ function Login() {
                       </span>
                     </p>
                   </form>
+				  <AuthenticationButtons />
                 </div>
               </div>
             </div>
