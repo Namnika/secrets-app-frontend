@@ -352,7 +352,7 @@ function Register() {
                         onClick={facebook}>
                           <AiFillFacebook
                             size={28}
-                            style={{ marginRight: "17px", color: "#3AB4F2" }}
+                            style={{ color: "#083AA9", marginRight: "17px" }}
                           />
                           Sign Up with Facebook
                         </button>
@@ -366,7 +366,7 @@ function Register() {
                         >
                           <AiFillGithub
                             size={28}
-                            style={{ marginRight: "30px" }}
+                            style={{ color:"black", marginRight: "30px" }}
                           />
                           Sign Up with Github
                         </button>

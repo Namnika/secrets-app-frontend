@@ -11,7 +11,7 @@ function Login() {
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
-  
+
   const github = () => {
     window.open("http://localhost:5000/auth/github", "_self");
   };
@@ -162,7 +162,7 @@ function Login() {
                         >
                           <AiFillFacebook
                             size={28}
-                            style={{ marginRight: "17px", color: "#3AB4F2" }}
+                            style={{ color: "#083AA9", marginRight: "17px" }}
                           />
                           Sign In with Facebook
                         </button>
@@ -176,7 +176,7 @@ function Login() {
                         >
                           <AiFillGithub
                             size={28}
-                            style={{ marginRight: "30px" }}
+                            style={{ color:"black", marginRight: "30px" }}
                           />
                           Sign In with Github
                         </button>

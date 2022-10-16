@@ -87,13 +87,12 @@ body {
 }
 
 .btn-google {
-  color: #fff;
-  background-color: #3d3c42;
+  color:grey;
   width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
+  background-color: #fff;
+  border-color:lightgrey;
   margin-bottom: 12px;
   margin-left: 30px;
   font-size: 15px;
@@ -102,13 +101,12 @@ body {
 }
 
 .btn-facebook {
-  color: #fff;
-  background-color: #3d3c42;
+  color: grey;
   width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
+  background-color: #fff;
+  border-color:lightgrey;
   margin-bottom: 12px;
   margin-left: 30px;
   font-size: 15px;
@@ -117,14 +115,13 @@ body {
 }
 
 .btn-github {
-  color: #fff;
-  background-color: #3d3c42;
+  color: grey;
   width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   font-size: 15px;
+  background-color: #fff;
+  border-color:lightgrey;
   margin-bottom: 12px;
   margin-left: 30px;
   font-weight: bold;
