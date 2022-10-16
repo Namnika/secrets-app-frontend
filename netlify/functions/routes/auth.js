@@ -30,7 +30,7 @@ router.get(
   })
 );
 
-router.get("/facebook", passport.authenticate("facebook", { scope: [ 'user:email' ] }));
+router.get("/facebook", passport.authenticate("facebook"));
 
 router.get(
   "/facebook/callback",

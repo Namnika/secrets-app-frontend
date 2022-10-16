@@ -9,6 +9,8 @@ import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
 // THIS IS A REACT-ROUTER V6 APP
+// privacy-policy link:https://www.freeprivacypolicy.com/live/0794eecc-f651-48ff-af26-806c24d6b442
+// terms policy-link: https://www.freeprivacypolicy.com/live/cd3bc8c0-aba2-402d-88f6-29aea7f42cc1
 
 const App = () => {
   const [user, setUser] = useState("");
