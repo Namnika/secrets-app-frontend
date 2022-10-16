@@ -1,15 +1,25 @@
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-import AuthenticationButtons from "./AuthenticationButtons";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillFacebook } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 import axios from "../api/axios";
-const LOGIN_URL = "/auth";
-
-/* HOW TO CONVERT CLASS COMPONENT TO FUNCTIONAL COMPONENT ==>
-HELPFUL REF: https://stackoverflow.com/questions/69965343/convert-react-class-based-to-functional-component
-*/
+const LOGIN_URL = "/login";
 
 function Login() {
+  const google = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+  
+  const github = () => {
+    window.open("http://localhost:5000/auth/github", "_self");
+  };
+
+  const facebook = () => {
+    window.open("http://localhost:5000/auth/facebook", "_self");
+  };
+
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -32,7 +42,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    // console.log(email, password);
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -42,9 +52,7 @@ function Login() {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
-      console.log(JSON.stringify(response));
-      console.log(response?.data?.accessToken);
+      //   console.log(JSON.stringify(response?.data));
 
       const accessToken = response?.data?.accessToken;
 
@@ -69,10 +77,10 @@ function Login() {
   return (
     <>
       {success ? (
-        navigate("/submit")
+        navigate("/secrets")
       ) : (
         <div className="container mt-5 home">
-          <h1>Login</h1>
+          <h1>Sign In</h1>
           <div className="row">
             <div className="col-sm-8">
               <div className="card">
@@ -103,6 +111,7 @@ function Login() {
                       />
                     </div>
                     <div className="form-group">
+                      <br />
                       <label htmlFor="password">Password</label>
                       <input
                         type="password"
@@ -115,7 +124,7 @@ function Login() {
                         value={password}
                       />
                     </div>
-					<br />
+                    <br />
                     <button className="btn btn-dark">Log In</button>
 
                     <p className="extraline">
@@ -123,11 +132,57 @@ function Login() {
                       <br />
                       <span className="line">
                         {/* put router link here */}
-                        <Link to="/register">Register</Link>
+                        <Link to="/register">Sign Up</Link>
                       </span>
                     </p>
                   </form>
-				  <AuthenticationButtons />
+                  <div className="container-fluid">
+                    <div className="row">
+                      <div className="center">
+                        <hr className="orline" />
+                        <div className="or">OR</div>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button
+                          className="btn-google"
+                          alt="google"
+                          onClick={google}
+                        >
+                          <FcGoogle size={28} style={{ marginRight: "30px" }} />
+                          Sign In with Google
+                        </button>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button
+                          className="btn-facebook"
+                          alt="facebook"
+                          onClick={facebook}
+                        >
+                          <AiFillFacebook
+                            size={28}
+                            style={{ marginRight: "17px", color: "#3AB4F2" }}
+                          />
+                          Sign In with Facebook
+                        </button>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button
+                          className="btn-github"
+                          alt="github"
+                          onClick={github}
+                        >
+                          <AiFillGithub
+                            size={28}
+                            style={{ marginRight: "30px" }}
+                          />
+                          Sign In with Github
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

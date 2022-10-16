@@ -6,7 +6,9 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AuthenticationButtons from "./AuthenticationButtons";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillFacebook } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
@@ -16,6 +18,19 @@ const PASS_REGEX =
 const REGISTER_URL = "/register";
 
 function Register() {
+  const google = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+  
+  const github = () => {
+    window.open("http://localhost:5000/auth/github", "_self");
+  };
+  
+  const facebook = () => {
+    window.open("http://localhost:5000/auth/facebook", "_self");
+  };
+
+
   const emailRef = React.useRef();
   const errRef = React.useRef();
 
@@ -141,7 +156,7 @@ function Register() {
         navigate("/secrets")
       ) : (
         <div className="container mt-5 home">
-          <h1>Register</h1>
+          <h1>Sign Up</h1>
           <div className="row">
             <div className="col-sm-8">
               <div className="card">
@@ -185,7 +200,8 @@ function Register() {
                         onFocus={() => setEmailFocus(true)}
                         onBlur={() => {
                           setEmailFocus(false);
-                        }}/>
+                        }}
+                      />
 
                       <p
                         id="eidnote"
@@ -193,8 +209,8 @@ function Register() {
                           emailFocus && email && !validEmail
                             ? "instructions"
                             : "offscreen"
-                        }>
-
+                        }
+                      >
                         <FontAwesomeIcon icon={faInfoCircle} />
                         4 to 24 characters.
                         <br />
@@ -205,7 +221,7 @@ function Register() {
                     </div>
 
                     <div className="form-group">
-					<br />
+                      <br />
                       <label htmlFor="password">
                         Password
                         <span className={validPassword ? "valid" : "hide"}>
@@ -233,7 +249,7 @@ function Register() {
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
                       />
-                     <p
+                      <p
                         id="pwdnote"
                         className={
                           passwordFocus && !validPassword
@@ -246,7 +262,7 @@ function Register() {
                       </p>
                     </div>
                     <div className="form-group">
-					<br />
+                      <br />
                       <label htmlFor="confirm_password">
                         Confirm Password
                         <span
@@ -290,7 +306,7 @@ function Register() {
                         Must match the first password input field.
                       </p>
                     </div>
-					<br />
+                    <br />
                     <button
                       disabled={
                         !validEmail || !validPassword || !validMatch
@@ -306,11 +322,57 @@ function Register() {
                       <br />
                       <span className="line">
                         {/* put router link here */}
-                        <a href="./login">Log In</a>
+                        <a href="./login">Sign In</a>
                       </span>
                     </p>
                   </form>
-                  <AuthenticationButtons />
+
+                  <div className="container-fluid">
+                    <div className="row">
+                      <div className="center">
+                        <hr className="orline" />
+                        <div className="or">OR</div>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button
+                          className="btn-google"
+                          alt="google"
+                          onClick={google}
+                        >
+                          <FcGoogle size={28} style={{ marginRight: "30px" }} />
+                          Sign Up with Google
+                        </button>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button 
+                        className="btn-facebook" 
+                        alt="facebook"
+                        onClick={facebook}>
+                          <AiFillFacebook
+                            size={28}
+                            style={{ marginRight: "17px", color: "#3AB4F2" }}
+                          />
+                          Sign Up with Facebook
+                        </button>
+                      </div>
+
+                      <div className="col-sm-9">
+                        <button 
+                        className="btn-github" 
+                        alt="github"
+                        onClick={github}
+                        >
+                          <AiFillGithub
+                            size={28}
+                            style={{ marginRight: "30px" }}
+                          />
+                          Sign Up with Github
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

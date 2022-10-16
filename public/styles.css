@@ -1,5 +1,5 @@
 body {
-  background-color: #E8ECEF;
+  background-color: #e8ecef;
 }
 
 .centered {
@@ -45,12 +45,12 @@ body {
   bottom: -10px;
 }
 
-.instructions>svg {
+.instructions > svg {
   margin-right: 0.25rem;
 }
 
 .line {
-  display: inline-block;
+  display: flex-box;
 }
 
 .secret-text {
@@ -60,15 +60,42 @@ body {
   background-color: #000;
 }
 
+.center {
+  height: 100%;
+  display: flex;
+  position: relative;
+  padding-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.or {
+  border: 3px solid lightgray;
+  border-radius: 50%;
+  padding: 10px;
+  color: gray;
+  background-color: white;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.orline {
+  width: 70%;
+  border: 1px solid lightgray;
+  background-color: grey;
+  position: absolute;
+}
 
 .btn-google {
   color: #fff;
-  background-color: #3D3C42;
-  width: 300px;
+  background-color: #3d3c42;
+  width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   margin-bottom: 12px;
+  margin-left: 30px;
   font-size: 15px;
   font-weight: bold;
   font-style: inherit;
@@ -76,12 +103,14 @@ body {
 
 .btn-facebook {
   color: #fff;
-  background-color: #3D3C42;
-  width: 300px;
+  background-color: #3d3c42;
+  width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   margin-bottom: 12px;
+  margin-left: 30px;
   font-size: 15px;
   font-weight: bold;
   font-style: inherit;
@@ -89,12 +118,15 @@ body {
 
 .btn-github {
   color: #fff;
-  background-color: #3D3C42;
-  width: 300px;
+  background-color: #3d3c42;
+  width: 290px;
   height: 50px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   font-size: 15px;
+  margin-bottom: 12px;
+  margin-left: 30px;
   font-weight: bold;
   font-style: inherit;
 }

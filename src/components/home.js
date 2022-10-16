@@ -10,7 +10,7 @@ function Home(){
         <p className="lead">Don't keep your secrets, share them anonymously!</p>
         <hr/>
         <Link role="button" className="btn btn-light btn-lg" to="/register">Register</Link>
-        <Link role="button" className="btn btn-dark btn-lg" to="/login">Login</Link>
+        <Link role="button" className="btn btn-dark btn-lg" to="/login">Log In</Link>
       </div>
     </div>
   )
