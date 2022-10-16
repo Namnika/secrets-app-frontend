@@ -38,7 +38,6 @@ body {
   font-size: 13px;
   font-weight: bold;
   border-radius: 0.5rem;
-  /* background: #000; */
   color: rgba(43, 44, 54, 0.931);
   padding: 0.25rem;
   position: relative;
@@ -126,4 +125,6 @@ body {
   margin-left: 30px;
   font-weight: bold;
   font-style: inherit;
+} :hover {
+  
 }
