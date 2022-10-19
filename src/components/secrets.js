@@ -4,7 +4,6 @@ import useLogout from "../hooks/useLogout";
 import SecretPost from "./secretPost";
 import axios from "../api/axios";
 
-
 function Secrets() {
   const navigate = useNavigate();
   const logout = useLogout();
@@ -21,29 +20,24 @@ function Secrets() {
   useEffect(() => {
     const fetchSecrets = async () => {
       try {
-        const response = await axios.get('/secrets');
+        const response = await axios.get("/secrets");
         setSecrets(response.data);
-        setFetchError(fetchError);
-        setIsLoading(isLoading)
       } catch (err) {
-        if(err.response) {
-           // Not in the 200 response range
-        console.log(err.response.data);
-        console.log(err.response.data.message);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-        }else {
+        if (err.response) {
+          // Not in the 200 response range
+          setFetchError(err.response.data);
+        } else {
           console.log(`'Error': ${err.message}`);
         }
+      } finally {
+        setIsLoading(false);
       }
     };
     setTimeout(() => {
       (async () => await fetchSecrets())();
-    }, 2000)
+    }, 2000);
   }, []);
-   
-  
-  
+
   const submitSecret = (e) => {
     e.preventDefault();
     navigate("/submit");
@@ -63,16 +57,16 @@ function Secrets() {
           >{`Error: ${fetchError}`}</p>
         )}
 
-        {!isLoading &&
-          (secrets.map((t, index) => (
+        {!fetchError &&
+          !isLoading &&
+          secrets.map((t) => (
             <SecretPost
               key={t._id}
               id={t._id}
               post={t.secret}
               className="secret-text"
-             />
-             
-          )))}
+            />
+          ))}
 
         <button className="btn btn-light btn-lg" onClick={signOut}>
           Log Out
