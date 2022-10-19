@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
 	email: {
 		type: String
 	},
-	username: String,
+	username: {
+		type: String
+	},
 	roles: {
 		User: {
 			type: Number,
@@ -21,7 +22,7 @@ const userSchema = new Schema({
 	refreshToken: String, 
 	googleId: String,
 	facebookId: String,
-	githubId: String,
+	githubId: String
 });
 
 userSchema.plugin(findOrCreate);
