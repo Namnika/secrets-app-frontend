@@ -15,7 +15,6 @@ const handleSecret = async (req, res) => {
   }
   const secretsWithUser = await Promise.all(
     secrets.map(async (secret) => {
-      const user = await User.findById(secret.user).lean().exec();
       return { ...secret };
     })
   );
