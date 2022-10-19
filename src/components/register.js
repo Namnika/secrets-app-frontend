@@ -21,15 +21,14 @@ function Register() {
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
-  
+
   const github = () => {
     window.open("http://localhost:5000/auth/github", "_self");
   };
-  
+
   const facebook = () => {
     window.open("http://localhost:5000/auth/facebook", "_self");
   };
-
 
   const emailRef = React.useRef();
   const errRef = React.useRef();
@@ -106,10 +105,6 @@ function Register() {
   }
 
   let navigate = useNavigate();
-
-  /* FOR TEXT NODE COMMENTS IN REACT: PUT COMMENTS INSIDE BRACES INSTALL PLUGIN
-	"eslint-plugin-react"
-	*/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -346,10 +341,11 @@ function Register() {
                       </div>
 
                       <div className="col-sm-9">
-                        <button 
-                        className="btn-facebook" 
-                        alt="facebook"
-                        onClick={facebook}>
+                        <button
+                          className="btn-facebook"
+                          alt="facebook"
+                          onClick={facebook}
+                        >
                           <AiFillFacebook
                             size={28}
                             style={{ color: "#083AA9", marginRight: "17px" }}
@@ -359,14 +355,14 @@ function Register() {
                       </div>
 
                       <div className="col-sm-9">
-                        <button 
-                        className="btn-github" 
-                        alt="github"
-                        onClick={github}
+                        <button
+                          className="btn-github"
+                          alt="github"
+                          onClick={github}
                         >
                           <AiFillGithub
                             size={28}
-                            style={{ color:"black", marginRight: "30px" }}
+                            style={{ color: "black", marginRight: "30px" }}
                           />
                           Sign Up with Github
                         </button>
