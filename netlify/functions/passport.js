@@ -21,7 +21,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://auth-blond.vercel.app/auth/google/secrets",
+      callbackURL: "https://auth-blond.vercel.app/auth/google/secrets",
     },
     function (accessToken, refreshToken, profile, cb) {
       User.findOrCreate(
@@ -40,7 +40,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://auth-blond.vercel.app/auth/github/secrets",
+      callbackURL: "https://auth-blond.vercel.app/auth/github/secrets",
     },
     function (accessToken, refreshToken, profile, cb) {
       User.findOrCreate(
@@ -58,7 +58,7 @@ passport.use(
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://auth-blond.vercel.app/auth/facebook/secrets",
+  callbackURL: "https://auth-blond.vercel.app/auth/facebook/secrets",
   enableProof: true
 },
 function(accessToken, refreshToken, profile, cb) {
