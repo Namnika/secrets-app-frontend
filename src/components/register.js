@@ -27,7 +27,7 @@ function Register() {
   };
 
   const facebook = () => {
-    window.open("https://auth-blond.vercel.app/auth/facebook", "_self");
+    window.open("https://secret-app.netlify.app/auth/facebook", "_self");
   };
 
   const emailRef = React.useRef();
