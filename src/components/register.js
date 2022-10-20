@@ -54,15 +54,11 @@ function Register() {
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    console.log(result);
-    console.log(email);
     setValidEmail(result);
   }, [email]);
 
   useEffect(() => {
     const result = PASS_REGEX.test(password);
-    console.log(result);
-    console.log(password);
     setValidPassword(result);
     setValidMatch(password === matchPassword);
   }, [password, matchPassword]);
