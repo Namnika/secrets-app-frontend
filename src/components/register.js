@@ -19,15 +19,15 @@ const REGISTER_URL = "/register";
 
 function Register() {
   const google = () => {
-    window.open("https://auth-blond.vercel.app/auth/google", "_self");
+    window.open("https://secret-app.netlify.app/auth/google", "_self");
   };
 
   const github = () => {
-    window.open("https://auth-blond.vercel.app/auth/github", "_self");
+    window.open("https://secret-app.netlify.app/auth/github", "_self");
   };
 
   const facebook = () => {
-    window.open("https://auth-blond.vercel.app/auth/facebook", "_self");
+    window.open("https://secret-app.netlify.app/auth/facebook", "_self");
   };
 
   const emailRef = React.useRef();
@@ -121,9 +121,9 @@ function Register() {
           withCredentials: true,
         }
       );
-      console.log(response.data);
-      console.log(response.accessToken);
-      console.log(JSON.stringify(response));
+      // console.log(response.data);
+      // console.log(response.accessToken);
+      // console.log(JSON.stringify(response));
       setSuccess(true);
 
       // clear input fields
