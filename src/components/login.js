@@ -9,7 +9,7 @@ const LOGIN_URL = "/login";
 
 function Login() {
   const google = () => {
-    window.open("https://auth-blond.vercel.app/auth/google", "_self");
+    window.open("http://auth-blond.vercel.app/auth/google", "_self");
   };
 
   const github = () => {

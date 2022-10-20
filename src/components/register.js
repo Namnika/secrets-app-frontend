@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 import {
   faCheck,
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
 const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
@@ -310,7 +310,7 @@ function Register() {
                       <br />
                       <span className="line">
                         {/* put router link here */}
-                        <a href="./login">Sign In</a>
+                        <Link to="/login">Sign Up</Link>
                       </span>
                     </p>
                   </form>
