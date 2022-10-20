@@ -144,7 +144,7 @@ function Register() {
   return (
     <>
       {success ? (
-        navigate("/secrets")
+        navigate("https://secret-app.netlify.app/secrets")
       ) : (
         <div className="container mt-5 home">
           <h1>Sign Up</h1>
