@@ -41,7 +41,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -54,8 +54,7 @@ function Login() {
       //   console.log(JSON.stringify(response?.data));
 
       const accessToken = response?.data?.accessToken;
-
-      setAuth({ email, accessToken }); //no set password, roles in setAuth because setAuth() content stores password for long time
+      setAuth({ email, accessToken });
       setEmail("");
       setPassword("");
       setSuccess(true);
@@ -175,7 +174,7 @@ function Login() {
                         >
                           <AiFillGithub
                             size={28}
-                            style={{ color:"black", marginRight: "30px" }}
+                            style={{ color: "black", marginRight: "30px" }}
                           />
                           Sign In with Github
                         </button>

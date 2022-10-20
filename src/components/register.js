@@ -157,9 +157,6 @@ function Register() {
               <div className="card">
                 <div className="card-body">
                   <form onSubmit={handleSubmit}>
-                    {/* don't use "action=''" & "method: POST" while using axios routing
-								cause it's doing same thing.
-								*/}
                     <div className="form-group">
                       <p
                         ref={errRef}

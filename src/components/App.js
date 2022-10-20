@@ -6,8 +6,6 @@ import Register from "./register";
 import Submit from "./submit";
 import Secrets from "./secrets";
 
-// THIS IS A REACT-ROUTER V6 APP
-
 const App = () => {
   return (
     <Router>
