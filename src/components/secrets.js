@@ -20,7 +20,7 @@ function Secrets() {
   useEffect(() => {
     const fetchSecrets = async () => {
       try {
-        const response = await axios.get("/secrets");
+        const response = await axios.get("https://secret-app.netlify.app/secrets");
         setSecrets(response.data);
       } catch (err) {
         if (err.response) {
