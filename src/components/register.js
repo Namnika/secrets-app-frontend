@@ -19,7 +19,7 @@ const REGISTER_URL = "/register";
 
 function Register() {
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("https://auth-blond.vercel.app/auth/google", "_self");
   };
 
   const github = () => {
