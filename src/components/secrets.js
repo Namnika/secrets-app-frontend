@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import SecretPost from "./secretPost";
 import axios from "../api/axios";
+const SECRET_URL = "/secrets";
 
 function Secrets() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Secrets() {
   useEffect(() => {
     const fetchSecrets = async () => {
       try {
-        const response = await axios.get("/secrets");
+        const response = await axios.get(SECRET_URL);
         setSecrets(response.data);
       } catch (err) {
         if (err.response) {
