@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-const CLIENT_URL = "https://secret-app.netlify.app/secrets";
+const CLIENT_URL = "https://secret-app.netlify.app/secret";
 
 router.get("/auth/failed", (req, res) => {
   res.status(401).json({
