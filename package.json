@@ -1,5 +1,5 @@
 {
-  "name": "secrets-app",
+  "name": "secrets-app-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -29,8 +29,5 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "netlify-cli": "^12.0.11"
   }
 }
