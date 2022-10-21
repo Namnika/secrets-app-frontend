@@ -19,7 +19,7 @@ const REGISTER_URL = "/register";
 
 function Register() {
   const google = () => {
-    window.open("http://auth-blond.vercel.app/auth/google", "_self");
+    window.open("http://secret-app-api-0ers.onrender.com/auth/google", "_self");
   };
 
   const github = () => {
