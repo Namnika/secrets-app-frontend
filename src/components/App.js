@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./home";
 import Login from "./login";
 import Register from "./register";
@@ -8,6 +8,7 @@ import Secrets from "./secrets";
 
 const App = () => {
   return (
+    <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="secrets" element={<Secrets />} />
         </Routes>
       </div>
+    </Router>
   );
 };
 
