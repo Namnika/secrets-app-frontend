@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://auth-blond.vercel.app",
+  baseURL: "http://auth-blond.vercel.app",
 });
