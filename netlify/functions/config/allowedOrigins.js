@@ -1,6 +1,5 @@
 const allowedOrigins = [
-   'https://auth-blond.vercel.app',
-   'https://secret-app.netlify.app'
+   'https://secretapp.onrender.com'
 ];
 
 module.exports = allowedOrigins;
