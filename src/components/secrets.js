@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import SecretPost from "./SecretPost";
 import axios from "../api/axios";
-const SECRET_URL = "/secret";
+const SECRET_URL = "/secrets";
 
 function Secrets() {
   const navigate = useNavigate();
