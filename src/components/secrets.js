@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
-import SecretPost from "./secretPost";
+import SecretPost from "./SecretPost";
 import axios from "../api/axios";
-const SECRET_URL = "/secrets";
+const SECRET_URL = "/secret";
 
 function Secrets() {
   const navigate = useNavigate();

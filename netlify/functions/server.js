@@ -60,7 +60,7 @@ app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/login", require("./routes/login"));
 app.use("/submit", require("./routes/submit"));
-app.use("/secrets", require("./routes/secrets"));
+app.use("/secret", require("./routes/secret"));
 // social authentication
 app.use("/auth", require("./routes/auth"));
 app.use("/refresh", require("./routes/refresh"));
