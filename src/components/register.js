@@ -310,7 +310,7 @@ function Register() {
                       <br />
                       <span className="line">
                         {/* put router link here */}
-                        <Link to="/login">Sign Up</Link>
+                        <Link to="/login">Sign In</Link>
                       </span>
                     </p>
                   </form>
