@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./login";
 import Home from "./home";
+import Login from "./login";
 import Register from "./register";
 import Submit from "./submit";
 import Secrets from "./secrets";
