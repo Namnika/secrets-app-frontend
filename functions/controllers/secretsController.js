@@ -1,5 +1,4 @@
 const Secret = require("../model/Secret");
-const User = require("../model/User");
 
 // @desc  Get all secrets
 // @route   Get/secrets
