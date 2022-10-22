@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddSecret from "./AddSecret";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+const SUBMIT_URL = "/submit";
 
 function Submit() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Submit() {
 
     const newSecret = { secret: inputText };
     try {
-      const response = await axios.post("/submit", newSecret);
+      const response = await axios.post(SUBMIT_URL, newSecret);
       const allSecrets = [...secrets, response.data];
       setSecrets(allSecrets);
       setInputText("");
