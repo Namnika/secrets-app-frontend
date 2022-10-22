@@ -1,6 +1,6 @@
 {
 
-    "version": 2,
+    "version": 3,
 
     "builds": [
 
@@ -20,7 +20,7 @@
 
             "src": "/(.*)",
 
-            "dest": "/server.js"
+            "dest": "./src/index.js"
 
         }
 
