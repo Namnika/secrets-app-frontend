@@ -53,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // serve static files
-app.use("/", express.static(path.join(__dirname, "/public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
 // routes
 app.use("/", require("./routes/root"));
