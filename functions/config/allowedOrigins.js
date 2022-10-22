@@ -1,5 +1,5 @@
 const allowedOrigins = [
-   'http://localhost:3000',
+   'https://secret-app.stormkit.dev',
    'http://localhost:5000'
 ];
 
