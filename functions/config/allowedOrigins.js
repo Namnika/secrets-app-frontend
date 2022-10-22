@@ -1,6 +1,6 @@
 const allowedOrigins = [
    'https://secret-app.stormkit.dev',
-   'http://localhost:5000'
+   'https://secret-api-namnika.vercel.app'
 ];
 
 module.exports = allowedOrigins;
