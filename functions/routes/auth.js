@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-const CLIENT_URL = "https://secrets-app-frontend.vercel.app/secrets";
+const CLIENT_URL = "http://localhost:3000/secrets";
 
 router.get("/auth/failed", (req, res) => {
   res.status(401).json({

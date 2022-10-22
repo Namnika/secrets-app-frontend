@@ -1,6 +1,6 @@
 const allowedOrigins = [
-   'https://secrets-app-frontend.vercel.app',
-   'https://secrets-app-api.vercel.app'
+   'http://localhost:3000',
+   'http://localhost:5000'
 ];
 
 module.exports = allowedOrigins;
