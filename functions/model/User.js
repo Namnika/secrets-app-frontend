@@ -19,10 +19,18 @@ const userSchema = new mongoose.Schema({
 	password: {
 		type: String
 	},
-	refreshToken: String, 
-	googleId: String,
-	facebookId: String,
-	githubId: String
+	refreshToken: {
+		type: String
+	}, 
+	googleId: {
+		type: String
+	},
+	facebookId: {
+		type: String
+	},
+	githubId: {
+		type: String
+	}
 });
 
 userSchema.plugin(findOrCreate);
