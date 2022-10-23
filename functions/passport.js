@@ -58,7 +58,7 @@ passport.use(
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://secrets-app-frontend.vercel.app/auth/facebook/callback",
+  callbackURL: "https://www.secrets-app-frontend.vercel.app/auth/facebook/callback",
   enableProof: true
 },
 function(accessToken, refreshToken, profile, cb) {

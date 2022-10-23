@@ -27,7 +27,7 @@ function Register() {
   };
 
   const facebook = () => {
-    window.open("https://secrets-app-frontend.vercel.app/auth/facebook/secrets", "_self");
+    window.open("https://www.secrets-app-frontend.vercel.app/auth/facebook", "_self");
   };
 
   const emailRef = React.useRef();
