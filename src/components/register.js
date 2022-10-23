@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
+import { AiFillApple } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
@@ -26,8 +26,8 @@ function Register() {
     window.open("http://secrets-app-frontend.vercel.app/auth/github", "_self");
   };
 
-  const facebook = () => {
-    window.open("https://www.secrets-app-frontend.vercel.app/auth/facebook", "_self");
+  const apple = () => {
+    window.open("https://secrets-app-frontend.vercel.app/auth/facebook", "_self");
   };
 
   const emailRef = React.useRef();
@@ -328,7 +328,7 @@ function Register() {
                           alt="google"
                           onClick={google}
                         >
-                          <FcGoogle size={28} style={{ marginRight: "30px" }} />
+                          <FcGoogle size={25} style={{ marginRight: "17px" }} />
                           Sign Up with Google
                         </button>
                       </div>
@@ -337,13 +337,13 @@ function Register() {
                         <button
                           className="btn-facebook"
                           alt="facebook"
-                          onClick={facebook}
+                          onClick={apple}
                         >
-                          <AiFillFacebook
-                            size={28}
-                            style={{ color: "#083AA9", marginRight: "17px" }}
+                          <AiFillApple
+                            size={25}
+                            style={{ color:'#000', marginRight: "17px" }}
                           />
-                          Sign Up with Facebook
+                          Sign Up with Apple
                         </button>
                       </div>
 
@@ -354,8 +354,8 @@ function Register() {
                           onClick={github}
                         >
                           <AiFillGithub
-                            size={28}
-                            style={{ color: "black", marginRight: "30px" }}
+                            size={25}
+                            style={{ color: "#000", marginRight: "17px" }}
                           />
                           Sign Up with Github
                         </button>

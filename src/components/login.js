@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
+import { AiFillApple } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import axios from "../api/axios";
 const LOGIN_URL = "/login";
@@ -16,7 +16,7 @@ function Login() {
     window.open("http://secrets-app-frontend.vercel.app/auth/github", "_self");
   };
 
-  const facebook = () => {
+  const apple = () => {
     window.open("http://secrets-app-frontend.vercel.app/auth/facebook", "_self");
   };
 
@@ -145,7 +145,7 @@ function Login() {
                           alt="google"
                           onClick={google}
                         >
-                          <FcGoogle size={28} style={{ marginRight: "30px" }} />
+                          <FcGoogle size={25} style={{ marginRight: "17px" }} />
                           Sign In with Google
                         </button>
                       </div>
@@ -154,13 +154,13 @@ function Login() {
                         <button
                           className="btn-facebook"
                           alt="facebook"
-                          onClick={facebook}
+                          onClick={apple}
                         >
-                          <AiFillFacebook
-                            size={28}
-                            style={{ color: "#083AA9", marginRight: "17px" }}
+                          <AiFillApple
+                            size={25}
+                            style={{ color: "#000", marginRight: "17px" }}
                           />
-                          Sign In with Facebook
+                          Sign In with Apple
                         </button>
                       </div>
 
@@ -171,8 +171,8 @@ function Login() {
                           onClick={github}
                         >
                           <AiFillGithub
-                            size={28}
-                            style={{ color: "black", marginRight: "30px" }}
+                            size={25}
+                            style={{ color: "#000", marginRight: "17px" }}
                           />
                           Sign In with Github
                         </button>
