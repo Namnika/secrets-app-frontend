@@ -27,7 +27,7 @@ function Register() {
   };
 
   const twitter = () => {
-    window.open("http://localhost:5000/auth/twitter", "_self");
+    window.open("http://secrets-app-frontend.vercel.app/auth/twitter", "_self");
   };
 
   const emailRef = React.useRef();

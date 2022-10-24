@@ -61,7 +61,7 @@ passport.use(
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_CLIENT_ID,
   consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-  callbackURL: "http://localhost:5000/auth/twitter/callback"
+  callbackURL: "http://secrets-app-frontend.vercel.app/auth/twitter/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
   User.findOrCreate({ twitterId: profile.id, username: profile.displayName},
