@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 	googleId: {
 		type: String
 	},
-	facebookId: {
+	twitterId: {
 		type: String
 	},
 	githubId: {

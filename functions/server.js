@@ -45,6 +45,7 @@ app.use(
 
 app.get("/logout", function (req, res, next) {
   req.session = null;
+  req.logOut();
   next();
 });
 

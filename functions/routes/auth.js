@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-const CLIENT_URL = "https://secrets-app-five.vercel.app/secrets";
+const CLIENT_URL = "http://localhost:3000/secrets";
 
 router.get("/auth/failed", (req, res) => {
   res.status(401).json({
@@ -33,11 +33,11 @@ router.get(
   })
 );
 
-router.get("/facebook", passport.authenticate("facebook"));
+router.get("/twitter", passport.authenticate("twitter"));
 
 router.get(
-  "/facebook/secrets",
-  passport.authenticate("facebook", {
+  "/twitter/callback",
+  passport.authenticate("twitter", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/auth/failed",
   })

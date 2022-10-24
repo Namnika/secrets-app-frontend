@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillApple } from "react-icons/ai";
+import { AiOutlineTwitter } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import axios from "../api/axios";
 const LOGIN_URL = "/login";
@@ -16,8 +16,8 @@ function Login() {
     window.open("http://secrets-app-frontend.vercel.app/auth/github", "_self");
   };
 
-  const apple = () => {
-    window.open("http://secrets-app-frontend.vercel.app/auth/facebook", "_self");
+  const twitter = () => {
+    window.open("http://localhost:5000/auth/twitter", "_self");
   };
 
   const { setAuth } = useAuth();
@@ -154,13 +154,13 @@ function Login() {
                         <button
                           className="btn-facebook"
                           alt="facebook"
-                          onClick={apple}
+                          onClick={twitter}
                         >
-                          <AiFillApple
+                          <AiOutlineTwitter
                             size={25}
-                            style={{ color: "#000", marginRight: "17px" }}
+                            style={{ color: "#2192FF", marginRight: "17px" }}
                           />
-                          Sign In with Apple
+                          Sign In with Twitter
                         </button>
                       </div>
 
