@@ -5,7 +5,7 @@ This app provides strong authenticity for the user and has login/signup access t
 ## Overview
 
 ### Screenshot
-![Website screenshot](/public/SecretScreenshot.png)
+<img src="/public/SecretScreenshot.png" width=600 height=580/>
 
 ### Link
 - Live Site URL: [Secret Authentication](https://secrets-app-five.vercel.app/)
